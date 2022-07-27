@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments::head">
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <nav th:replace="fragments::sidebar"></nav>
+
+        <div class="page-wrapper">
+            <div class="page-content">
+
+                <nav class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                        <li aria-current="page" class="breadcrumb-item active">Data Table</li>
+                    </ol>
+                </nav>
+
+                <div class="row">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title">All Posts</h6>
+                                <p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank">
+                                    Official DataTables Documentation </a>for a full list of instructions and other
+                                    options.
+                                </p>
+                                <div class="table-responsive">
+                                    <table class="table" id="dataTableExample">
+                                        <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Category</th>
+                                            <th>Author</th>
+                                            <th>Content</th>
+                                            <th>Created Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="post : ${posts}">
+                                            <td th:text="${post.title}"></td>
+                                            <td th:text="${post.category}"></td>
+                                            <td>On Progress</td>
+                                            <td th:text="${#strings.abbreviate(post.content,150)}"></td>
+                                            <td>On Progress</td>
+                                            <td>On Progress</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <footer th:replace="fragments::footer"></footer>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments::scripts">
+    </div>
+
+    <div th:replace="fragments::scripts-datatables">
+    </div>
+
+</body>
+</html>
