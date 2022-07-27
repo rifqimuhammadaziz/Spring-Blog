@@ -10,13 +10,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "posts")
+@Table(name = "posts", uniqueConstraints = @UniqueConstraint(columnNames = "title"))
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "title", nullable = false)
     private String title;
-    private String category;
+
+    @ManyToOne
+    private Category category;
+
+    @Column(name = "content", nullable = false)
     private String content;
 }
