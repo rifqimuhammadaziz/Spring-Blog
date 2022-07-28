@@ -30,8 +30,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post findById(Long id) {
-        return postRepository.findById(id).get();
+    public PostDto findById(Long id) {
+        Post post = postRepository.findById(id).get();
+        PostDto postDto = mapperDto(post);
+        return postDto;
     }
 
     @Override
@@ -47,7 +49,16 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post update(PostDto postDto) {
-        return null;
+        try {
+            Post currentPost = postRepository.findById(postDto.getId()).get();
+            currentPost.setTitle(postDto.getTitle());
+            currentPost.setCategory(postDto.getCategory());
+            currentPost.setContent(postDto.getContent());
+            return postRepository.save(currentPost);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

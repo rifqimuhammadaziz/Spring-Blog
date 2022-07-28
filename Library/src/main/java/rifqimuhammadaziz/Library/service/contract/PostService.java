@@ -8,7 +8,7 @@ import java.util.List;
 public interface PostService {
     /* DASHBOARD */
     List<PostDto> findAll();
-    Post findById(Long id);
+    PostDto findById(Long id);
     Post save(PostDto postDto);
     Post update(PostDto postDto);
     void deleteById(Long id);

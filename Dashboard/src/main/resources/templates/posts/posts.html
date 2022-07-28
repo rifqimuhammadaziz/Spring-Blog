@@ -22,6 +22,16 @@
                     <div class="col-md-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
+
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${createSuccess}">
+                                    <strong th:text="${createSuccess}"></strong> Wait for publish by Administrator
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+                                </div>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${updateSuccess}">
+                                    <strong th:text="${updateSuccess}"></strong> Wait for publish by Administrator
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+                                </div>
+
                                 <h6 class="card-title">All Posts</h6>
                                 <p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank">
                                     Official DataTables Documentation </a>for a full list of instructions and other
@@ -46,7 +56,11 @@
                                             <td>On Progress</td>
                                             <td th:utext="${#strings.abbreviate(post.content,150)}"></td>
                                             <td>On Progress</td>
-                                            <td>On Progress</td>
+                                            <td>
+                                                <a class="btn btn-primary btn-icon" th:href="@{/update-post/{id} (id = ${post.id})}">
+                                                    <i data-feather="edit"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
