@@ -10,6 +10,7 @@ import rifqimuhammadaziz.Library.repository.PostRepository;
 import rifqimuhammadaziz.Library.service.contract.PostService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -22,8 +23,10 @@ public class PostServiceImpl implements PostService {
     private ModelMapper modelMapper;
 
     @Override
-    public List<Post> findAll() {
-        return postRepository.findAll();
+    public List<PostDto> findAll() {
+        List<Post> posts = postRepository.findAll();
+        List<PostDto> postDtoList = posts.stream().map(post -> mapperDto(post)).collect(Collectors.toList());
+        return postDtoList;
     }
 
     @Override
@@ -33,8 +36,13 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post save(PostDto postDto) {
-        Post post = mapperEntity(postDto);
-        return postRepository.save(post);
+        try {
+            Post post = mapperEntity(postDto);
+            return postRepository.save(post);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

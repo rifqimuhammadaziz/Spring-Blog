@@ -21,7 +21,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category save(Category category) {
-        return categoryRepository.save(category);
+        try {
+            Category newCategory = new Category(category.getName());
+            return categoryRepository.save(newCategory);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -46,6 +52,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> findAllByActivated() {
-        return null;
+        return categoryRepository.findAllByActivated();
     }
 }

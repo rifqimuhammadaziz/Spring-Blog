@@ -29,25 +29,23 @@
                                     Official TinyMCE Documentation </a>for a full list of instructions and other options.
                                 </p>
 
-                                <form class="forms-sample">
+                                <form class="forms-sample" th:action="@{/save-post}" th:object="${post}" method="POST">
                                     <div class="mb-3">
                                         <label for="title" class="form-label">Title</label>
-                                        <input type="text" class="form-control" id="title" autocomplete="off" placeholder="Post Title">
+                                        <input type="text" class="form-control" id="title" autocomplete="off" placeholder="Post Title" th:field="*{title}">
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleFormControlSelect1" class="form-label">Category</label>
-                                        <select class="form-select" id="exampleFormControlSelect1">
-                                            <option selected disabled>Select category</option>
-                                            <option>12-18</option>
-                                            <option>18-22</option>
-                                            <option>22-30</option>
-                                            <option>30-60</option>
-                                            <option>Above 60</option>
+                                        <select class="form-select" id="exampleFormControlSelect1" th:field="*{category}">
+                                            <option th:value="null" selected disabled>-- Select Category --</option>
+                                            <option th:each="category : ${categories}"
+                                                    th:value="${category.id}"
+                                                    th:text="${category.name}"></option>
                                         </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="tinymceExample" class="form-label">Content</label>
-                                        <textarea class="form-control" id="tinymceExample" name="tinymce" rows="10"></textarea>
+                                        <textarea class="form-control" id="tinymceExample" name="tinymce" rows="10" th:field="*{content}"></textarea>
                                     </div>
 
                                     <div class="d-block">

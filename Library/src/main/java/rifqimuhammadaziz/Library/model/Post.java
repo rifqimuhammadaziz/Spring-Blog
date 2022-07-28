@@ -24,5 +24,6 @@ public class Post {
     private Category category;
 
     @Column(name = "content", nullable = false)
+    @Lob()
     private String content;
 }

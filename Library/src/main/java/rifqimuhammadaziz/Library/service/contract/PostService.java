@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PostService {
     /* DASHBOARD */
-    List<Post> findAll();
+    List<PostDto> findAll();
     Post findById(Long id);
     Post save(PostDto postDto);
     Post update(PostDto postDto);

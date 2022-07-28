@@ -9,7 +9,7 @@
 	<meta content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web"
 	      name="keywords">
 
-	<title>NobleUI - HTML Bootstrap 5 Admin Dashboard Template</title>
+	<title>Title</title>
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com" rel="preconnect">
@@ -62,14 +62,14 @@
 					</li>
 					<li class="nav-item nav-category">posts</li>
 					<li class="nav-item">
-						<a aria-controls="emails" aria-expanded="false" class="nav-link" data-bs-toggle="collapse"
-						   href="#emails"
+						<a aria-controls="posts" aria-expanded="false" class="nav-link" data-bs-toggle="collapse"
+						   href="#posts"
 						   role="button">
 							<i class="link-icon" data-feather="mail"></i>
 							<span class="link-title">All Post</span>
 							<i class="link-arrow" data-feather="chevron-down"></i>
 						</a>
-						<div class="collapse" id="emails">
+						<div class="collapse" id="posts">
 							<ul class="nav sub-menu">
 								<li class="nav-item">
 									<a class="nav-link" th:href="@{/posts}">All</a>
@@ -97,17 +97,20 @@
 					</li>
 					<li class="nav-item nav-category">informations</li>
 					<li class="nav-item">
-						<a aria-controls="forms" aria-expanded="false" class="nav-link" data-bs-toggle="collapse"
-						   href="#forms"
+						<a aria-controls="informations" aria-expanded="false" class="nav-link" data-bs-toggle="collapse"
+						   href="#informations"
 						   role="button">
 							<i class="link-icon" data-feather="inbox"></i>
 							<span class="link-title">Forms</span>
 							<i class="link-arrow" data-feather="chevron-down"></i>
 						</a>
-						<div class="collapse" id="forms">
+						<div class="collapse" id="informations">
 							<ul class="nav sub-menu">
 								<li class="nav-item">
 									<a class="nav-link" href="#">Manage Information</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#">Category</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="#">Create</a>
@@ -176,6 +179,8 @@
 				</ul>
 			</div>
 		</nav>
+
+
 
 		<div class="page-wrapper">
 
