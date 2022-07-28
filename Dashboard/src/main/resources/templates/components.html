@@ -6,9 +6,8 @@
 
 <body>
 
-	<!-- Modal -->
 	<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true" th:fragment="addCategoryModal">
-		<form method="post" th:action="@{/add-category}" th:object="${newCategory}">
+		<form method="POST" th:action="@{/add-category}" th:object="${newCategory}">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -18,7 +17,7 @@
 					<div class="modal-body">
 						<div class="mb-3">
 							<label for="name" class="col-form-label">Category Name</label>
-							<input th:field="*{name}" type="text" class="form-control" id="name" name="name">
+							<input th:field="*{name}" type="text" class="form-control" id="name" name="name" required>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -29,6 +28,59 @@
 			</div>
 		</form>
 	</div>
+
+	<div th:fragment="editCategory" class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+		<form method="PUT" th:action="@{/update-category}">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mb-3">
+							<label for="categoryId" class="col-form-label">Category ID</label>
+							<input type="text" class="form-control" id="categoryId" name="id" readonly>
+						</div>
+						<div class="mb-3">
+							<label for="categoryName" class="col-form-label">Category Name</label>
+							<input type="text" class="form-control" id="categoryName" name="name">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Update</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+	<div class="modal fade" id="deleteCategoryModal" tabindex="-1" aria-labelledby="deleteCategoryModalLabel" aria-hidden="true" th:fragment="deleteCategoryModal">
+		<form method="PUT" th:action="@{/delete-category}">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="deleteCategoryModalLabel">Edit Category</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Are you sure to delete category : [[${category.name}]]</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-danger">Delete</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div th:replace="fragments::scripts">
+	</div>
+
+	<script th:src="@{/js/categories.js}"></script>
 
 </body>
 </html>
