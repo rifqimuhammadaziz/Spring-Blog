@@ -29,13 +29,13 @@ public class CategoryController {
     private String add(@ModelAttribute("newCategory") Category category, RedirectAttributes attributes) {
         try {
             categoryService.save(category);
-            attributes.addFlashAttribute("success", "New Category Added!");
+            attributes.addFlashAttribute("createSuccess", "New Category Added!");
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
-            attributes.addFlashAttribute("failed", "Duplicate category name");
+            attributes.addFlashAttribute("createFailed", "Duplicate category name");
         } catch (Exception e) {
             e.printStackTrace();
-            attributes.addFlashAttribute("failed", "Error server");
+            attributes.addFlashAttribute("createFailed", "Error server");
         }
         return "redirect:/posts/categories";
     }
@@ -50,13 +50,13 @@ public class CategoryController {
     public String update(Category category, RedirectAttributes attributes) {
         try {
             categoryService.update(category);
-            attributes.addFlashAttribute("success", "Category successfully updated");
+            attributes.addFlashAttribute("updateSuccess", "Category successfully updated");
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
-            attributes.addFlashAttribute("failed", "Failed to update category because duplicate name");
+            attributes.addFlashAttribute("updateFailed", "Failed to update category because duplicate name");
         } catch (Exception e) {
             e.printStackTrace();
-            attributes.addFlashAttribute("failed", "Error server");
+            attributes.addFlashAttribute("updateFailed", "Error server");
         }
         return "redirect:/categories";
     }
@@ -65,12 +65,24 @@ public class CategoryController {
     public String delete(Long id, RedirectAttributes attributes) {
         try {
             categoryService.deleteById(id);
-            attributes.addFlashAttribute("success", "Category deleted successfully");
+            attributes.addFlashAttribute("deleteSuccess", "Category deleted successfully");
         } catch (Exception e) {
             e.printStackTrace();
-            attributes.addFlashAttribute("failed", "Delete category failed");
+            attributes.addFlashAttribute("deleteFailed", "Delete category failed");
         }
-        return "redirect:/categories";
+        return "redirect:/posts/categories";
+    }
+
+    @RequestMapping(value = "/enable-category", method = {RequestMethod.PUT, RequestMethod.GET})
+    public String enable(Long id, RedirectAttributes attributes) {
+        try {
+            categoryService.enableById(id);
+            attributes.addFlashAttribute("enableSuccess", "Category successfully enabled");
+        } catch (Exception e) {
+            e.printStackTrace();
+            attributes.addFlashAttribute("enableFailed", "Failed to enable category");
+        }
+        return "redirect:/posts/categories";
     }
 
 }

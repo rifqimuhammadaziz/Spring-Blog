@@ -23,10 +23,7 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${success}">
-                                    <strong th:text="${success}"></strong> Try to add post with the category.
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
-                                </div>
+                                <div th:replace="alerts::categoryAlert"></div>
 
                                 <h6 class="card-title mb-2">All Categories</h6>
 
@@ -43,6 +40,7 @@
                                         <tr>
                                             <th>Index</th>
                                             <th>Category Name</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
@@ -51,8 +49,12 @@
                                             <td th:text="${category.id}"></td>
                                             <td th:text="${category.name}"></td>
                                             <td>
+                                                <span class="badge bg-success" th:if="${category.isActivated} == true">Active</span>
+                                                <span class="badge bg-danger" th:if="${category.isActivated} == false">Non-Active</span>
+                                            </td>
+                                            <td>
                                                 <a id="editButton" class="btn btn-primary btn-icon">
-                                                    <i data-feather="check-square"></i>
+                                                    <i data-feather="edit"></i>
                                                 </a>
                                                 <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true" th:fragment="editCategoryModal">
                                                     <form method="PUT" th:action="@{/update-category}">
@@ -81,10 +83,16 @@
                                                     </form>
                                                 </div>
 
-                                                <button type="button" class="btn btn-danger btn-icon" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal">
-                                                    <i data-feather="x-square"></i>
-                                                </button>
-                                                <div th:replace="components::deleteCategoryModal"></div>
+<!--                                                <button type="button" class="btn btn-danger btn-icon" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal">-->
+<!--                                                    <i data-feather="x-square"></i>-->
+<!--                                                </button>-->
+<!--                                                <div th:replace="components::deleteCategoryModal"></div>-->
+                                                <a th:if="${category.isActivated} == false" th:href="@{/enable-category/(id = ${category.id})}" id="enableButton" class="btn btn-success btn-icon">
+                                                    <i data-feather="check-square"></i>
+                                                </a>
+                                                <a th:if="${category.isDeleted} == false" th:href="@{/delete-category/(id = ${category.id})}" id="deleteButton" class="btn btn-danger btn-icon">
+                                                    <i data-feather="trash-2"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                         </tbody>
