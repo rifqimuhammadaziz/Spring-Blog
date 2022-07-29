@@ -96,4 +96,11 @@ public class PostController {
         }
         return "redirect:/posts";
     }
+
+    @GetMapping(value = "/posts/preview/{id}")
+    public String previewPost(@PathVariable("id") Long id, Model model) {
+        PostDto postDto = postService.findById(id);
+        model.addAttribute("postDto", postDto);
+        return "/posts/preview-post";
+    }
 }

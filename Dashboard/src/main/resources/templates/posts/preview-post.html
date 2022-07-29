@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments::head">
+</head>
+
+<body>
+
+	<div class="main-wrapper">
+		<nav th:replace="fragments::sidebar"></nav>
+
+		<div class="page-wrapper">
+			<div class="page-content">
+
+				<nav class="page-breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#">Tables</a></li>
+						<li aria-current="page" class="breadcrumb-item active">Data Table</li>
+					</ol>
+				</nav>
+
+				<div class="row">
+					<div class="col-md-12 grid-margin stretch-card">
+						<div class="card">
+							<div class="card-body">
+
+								<div class="alert alert-warning text-center" role="alert">
+									<h4 class="alert-heading">On Review</h4>
+									<p><strong>The Administrator</strong> will review the post before it can be seen on the blog. Publishing will take some time based on the order in which the posts are made</p>
+									<hr>
+									<p class="mb-0">After the post is declared published by the admin, then you can no longer edit it</p>
+								</div>
+
+								<div class="card mb-3">
+									<div class="card-header text-center">
+										<h3 class="mb-2">[[${postDto.title}]]</h3>
+										<h5 class="text-muted mb-2">[[${postDto.category.name}]]</h5>
+									</div>
+									<div class="card-body">
+										<p>[(${postDto.content})]</p>
+									</div>
+								</div>
+
+								<div class="d-grid gap-2">
+									<button type="button" class="btn btn-success btn-icon-text"><i class="btn-icon-prepend" data-feather="check-square"></i>Publish</button>
+									<button type="button" class="btn btn-secondary">Edit</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<footer th:replace="fragments::footer"></footer>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments::scripts">
+	</div>
+
+</body>
+</html>
