@@ -46,6 +46,7 @@
                                             <th>Author</th>
                                             <th>Content</th>
                                             <th>Created Date</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
@@ -55,10 +56,19 @@
                                             <td th:text="${post.category.name}"></td>
                                             <td>On Progress</td>
                                             <td th:utext="${#strings.abbreviate(post.content,150)}"></td>
-                                            <td>On Progress</td>
+                                            <td>2 Mei 1999</td>
                                             <td>
-                                                <a class="btn btn-primary btn-icon" th:href="@{/update-post/{id} (id = ${post.id})}">
+                                                <span class="badge bg-warning">On Review</span>
+                                            </td>
+                                            <td>
+                                                <a type="button" class="btn btn-success btn-icon" th:href="@{/update-post/{id} (id = ${post.id})}">
+                                                    <i data-feather="eye"></i>
+                                                </a>
+                                                <a type="button" class="btn btn-primary btn-icon" th:href="@{/update-post/{id} (id = ${post.id})}">
                                                     <i data-feather="edit"></i>
+                                                </a>
+                                                <a type="button" class="btn btn-danger btn-icon" th:href="@{/update-post/{id} (id = ${post.id})}">
+                                                    <i data-feather="trash"></i>
                                                 </a>
                                             </td>
                                         </tr>

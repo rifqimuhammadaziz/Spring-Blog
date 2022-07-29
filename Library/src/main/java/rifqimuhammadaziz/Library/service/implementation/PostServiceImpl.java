@@ -3,7 +3,6 @@ package rifqimuhammadaziz.Library.service.implementation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 import rifqimuhammadaziz.Library.dto.PostDto;
 import rifqimuhammadaziz.Library.model.Post;
 import rifqimuhammadaziz.Library.repository.PostRepository;
@@ -39,7 +38,13 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post save(PostDto postDto) {
         try {
-            Post post = mapperEntity(postDto);
+            Post post = new Post();
+            post.setTitle(postDto.getTitle());
+            post.setCategory(postDto.getCategory());
+            post.setContent(postDto.getContent());
+            post.setDeleted(false);
+            post.setPublished(true);
+            System.out.println(post);
             return postRepository.save(post);
         } catch (Exception e) {
             e.printStackTrace();

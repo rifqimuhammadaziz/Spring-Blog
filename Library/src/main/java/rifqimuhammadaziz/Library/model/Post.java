@@ -3,8 +3,10 @@ package rifqimuhammadaziz.Library.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Value;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -26,4 +28,7 @@ public class Post {
     @Column(name = "content", nullable = false)
     @Lob()
     private String content;
+
+    private boolean isPublished;
+    private boolean isDeleted;
 }
