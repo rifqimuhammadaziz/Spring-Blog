@@ -13,4 +13,6 @@ public class PostDto {
     private String title;
     private Category category;
     private String content;
+    private boolean isPublished;
+    private boolean isDeleted;
 }

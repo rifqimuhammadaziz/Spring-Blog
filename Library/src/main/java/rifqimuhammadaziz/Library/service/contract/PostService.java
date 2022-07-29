@@ -12,4 +12,5 @@ public interface PostService {
     Post save(PostDto postDto);
     Post update(PostDto postDto);
     void deleteById(Long id);
+    void publishById(Long id);
 }

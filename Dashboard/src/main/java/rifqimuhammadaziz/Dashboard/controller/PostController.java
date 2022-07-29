@@ -72,4 +72,28 @@ public class PostController {
         }
         return "redirect:/posts";
     }
+
+    @RequestMapping(value = "/delete-post", method = {RequestMethod.PUT, RequestMethod.GET})
+    public String deletePost(Long id, RedirectAttributes attributes) {
+        try {
+            postService.deleteById(id);
+            attributes.addFlashAttribute("deleteSuccess", "Post successfully deleted");
+        } catch (Exception e) {
+            e.printStackTrace();
+            attributes.addFlashAttribute("deleteFailed", "Delete post failed");
+        }
+        return "redirect:/posts";
+    }
+
+    @RequestMapping(value = "/publish-post", method = {RequestMethod.PUT, RequestMethod.GET})
+    public String publishPost(Long id, RedirectAttributes attributes) {
+        try {
+            postService.publishById(id);
+            attributes.addFlashAttribute("publishSuccess", "Post successfully published");
+        } catch (Exception e) {
+            e.printStackTrace();
+            attributes.addFlashAttribute("publishFailed", "Post failed to publish");
+        }
+        return "redirect:/posts";
+    }
 }

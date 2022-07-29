@@ -5,84 +5,99 @@
 
 <body>
 
-    <div class="main-wrapper">
-        <nav th:replace="fragments::sidebar"></nav>
+	<div class="main-wrapper">
+		<nav th:replace="fragments::sidebar"></nav>
 
-        <div class="page-wrapper">
-            <div class="page-content">
+		<div class="page-wrapper">
+			<div class="page-content">
 
-                <nav class="page-breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                        <li aria-current="page" class="breadcrumb-item active">Data Table</li>
-                    </ol>
-                </nav>
+				<nav class="page-breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#">Tables</a></li>
+						<li aria-current="page" class="breadcrumb-item active">Data Table</li>
+					</ol>
+				</nav>
 
-                <div class="row">
-                    <div class="col-md-12 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
+				<div class="row">
+					<div class="col-md-12 grid-margin stretch-card">
+						<div class="card">
+							<div class="card-body">
 
-                                <div th:replace="alerts::postAlert"></div>
+								<div th:replace="alerts::postAlert"></div>
 
-                                <h6 class="card-title">All Posts</h6>
-                                <p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank">
-                                    Official DataTables Documentation </a>for a full list of instructions and other
-                                    options.
-                                </p>
-                                <div class="table-responsive">
-                                    <table class="table" id="dataTableExample">
-                                        <thead>
-                                        <tr>
-                                            <th>Title</th>
-                                            <th>Category</th>
-                                            <th>Author</th>
-                                            <th>Content</th>
-                                            <th>Created Date</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr th:each="post : ${posts}">
-                                            <td th:text="${post.title}"></td>
-                                            <td th:text="${post.category.name}"></td>
-                                            <td>On Progress</td>
-                                            <td th:utext="${#strings.abbreviate(post.content,150)}"></td>
-                                            <td>2 Mei 1999</td>
-                                            <td>
-                                                <span class="badge bg-warning">On Review</span>
-                                            </td>
-                                            <td>
-                                                <a type="button" class="btn btn-success btn-icon" th:href="@{/update-post/{id} (id = ${post.id})}">
-                                                    <i data-feather="eye"></i>
-                                                </a>
-                                                <a type="button" class="btn btn-primary btn-icon" th:href="@{/update-post/{id} (id = ${post.id})}">
-                                                    <i data-feather="edit"></i>
-                                                </a>
-                                                <a type="button" class="btn btn-danger btn-icon" th:href="@{/update-post/{id} (id = ${post.id})}">
-                                                    <i data-feather="trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+								<h6 class="card-title">All Posts</h6>
+								<p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank">
+									Official DataTables Documentation </a>for a full list of instructions and other
+									options.
+								</p>
+								<div class="table-responsive">
+									<table class="table" id="dataTableExample">
+										<thead>
+										<tr>
+											<th>Title</th>
+											<th>Category</th>
+											<th>Author</th>
+											<th>Content</th>
+											<th>Created Date</th>
+											<th>Status</th>
+											<th>Action</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr th:each="post : ${posts}">
+											<td th:text="${post.title}"></td>
+											<td th:text="${post.category.name}"></td>
+											<td>On Progress</td>
+											<td th:utext="${#strings.abbreviate(post.content,50)}"></td>
+											<td>2 Mei 1999</td>
+											<td>
+                                                <span class="badge bg-success" th:if="${post.isPublished} == true">Published</span>
+                                                <span class="badge bg-warning" th:if="${post.isPublished} == false">On Review</span>
+											</td>
+											<td>
+												<a class="btn btn-warning btn-icon"
+												   th:href="@{/update-post/{id} (id = ${post.id})}"
+												   type="button">
+													<i data-feather="eye"></i>
+												</a>
+												<a class="btn btn-primary btn-icon"
+												   th:href="@{/update-post/{id} (id = ${post.id})}"
+												   type="button">
+													<i data-feather="edit"></i>
+												</a>
 
-                <footer th:replace="fragments::footer"></footer>
-            </div>
-        </div>
-    </div>
+												<a class="btn btn-success btn-icon"
+												   th:href="@{/publish-post/(id = ${post.id})}"
+												   th:if="${post.isPublished} == false"
+												   type="button">
+													<i data-feather="check-square"></i>
+												</a>
+												<a class="btn btn-danger btn-icon"
+												   th:href="@{/delete-post/(id = ${post.id})}"
+												   th:if="${post.isDeleted} == false"
+												   type="button">
+													<i data-feather="trash"></i>
+												</a>
+											</td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-    <div th:replace="fragments::scripts">
-    </div>
+				<footer th:replace="fragments::footer"></footer>
+			</div>
+		</div>
+	</div>
 
-    <div th:replace="fragments::scripts-datatables">
-    </div>
+	<div th:replace="fragments::scripts">
+	</div>
+
+	<div th:replace="fragments::scripts-datatables">
+	</div>
 
 </body>
 </html>
