@@ -17,7 +17,6 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private PostRepository postRepository;
 
-
     @Autowired
     private ModelMapper modelMapper;
 
@@ -25,6 +24,7 @@ public class PostServiceImpl implements PostService {
     public List<PostDto> findAll() {
         List<Post> posts = postRepository.findAll();
         List<PostDto> postDtoList = posts.stream().map(post -> mapperDto(post)).collect(Collectors.toList());
+
         return postDtoList;
     }
 
@@ -43,7 +43,7 @@ public class PostServiceImpl implements PostService {
             post.setCategory(postDto.getCategory());
             post.setContent(postDto.getContent());
             post.setDeleted(false);
-            post.setPublished(true);
+            post.setPublished(false);
             System.out.println(post);
             return postRepository.save(post);
         } catch (Exception e) {

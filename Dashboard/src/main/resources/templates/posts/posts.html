@@ -51,8 +51,9 @@
 											<td th:utext="${#strings.abbreviate(post.content,50)}"></td>
 											<td>2 Mei 1999</td>
 											<td>
-                                                <span class="badge bg-success" th:if="${post.isPublished} == true">Published</span>
-                                                <span class="badge bg-warning" th:if="${post.isPublished} == false">On Review</span>
+                                                <span class="badge bg-success" th:if="${post.isPublished == true}">Published</span>
+                                                <span class="badge bg-warning" th:if="${post.isPublished == false} and ${post.isDeleted == false}">On Review</span>
+                                                <span class="badge bg-danger" th:if="${post.isDeleted == true}">Archived</span>
 											</td>
 											<td>
 												<a class="btn btn-warning btn-icon"
@@ -68,13 +69,13 @@
 
 												<a class="btn btn-success btn-icon"
 												   th:href="@{/publish-post/(id = ${post.id})}"
-												   th:if="${post.isPublished} == false"
+												   th:if="${post.isPublished == false}"
 												   type="button">
 													<i data-feather="check-square"></i>
 												</a>
 												<a class="btn btn-danger btn-icon"
 												   th:href="@{/delete-post/(id = ${post.id})}"
-												   th:if="${post.isDeleted} == false"
+												   th:if="${post.isPublished == true}"
 												   type="button">
 													<i data-feather="trash"></i>
 												</a>
