@@ -87,10 +87,10 @@
 <!--                                                    <i data-feather="x-square"></i>-->
 <!--                                                </button>-->
 <!--                                                <div th:replace="components::deleteCategoryModal"></div>-->
-                                                <a th:if="${category.isActivated} == false" th:href="@{/enable-category/(id = ${category.id})}" id="enableButton" class="btn btn-success btn-icon">
+                                                <a th:if="${category.isActivated} == false" th:href="@{/enable-postCategory/(id = ${category.id})}" id="enableButton" class="btn btn-success btn-icon">
                                                     <i data-feather="check-square"></i>
                                                 </a>
-                                                <a th:if="${category.isDeleted} == false" th:href="@{/delete-category/(id = ${category.id})}" id="deleteButton" class="btn btn-danger btn-icon">
+                                                <a th:if="${category.isDeleted} == false" th:href="@{/delete-postCategory/(id = ${category.id})}" id="deleteButton" class="btn btn-danger btn-icon">
                                                     <i data-feather="trash-2"></i>
                                                 </a>
                                             </td>

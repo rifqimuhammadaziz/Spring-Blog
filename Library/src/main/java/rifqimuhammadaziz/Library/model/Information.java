@@ -10,8 +10,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "posts", uniqueConstraints = @UniqueConstraint(columnNames = "title"))
-public class Post {
+@Table(name = "informations", uniqueConstraints = @UniqueConstraint(columnNames = "title"))
+public class Information {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +21,11 @@ public class Post {
     private String title;
 
     @ManyToOne
-    private PostCategory postCategory;
+    private InformationCategory informationCategory;
 
     @Column(name = "content", nullable = false)
     @Lob()
     private String content;
 
-    private boolean isPublished;
     private boolean isDeleted;
 }

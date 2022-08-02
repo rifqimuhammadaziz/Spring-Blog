@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments::head">
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <nav th:replace="fragments::sidebar"></nav>
+
+        <div class="page-wrapper">
+            <div class="page-content">
+
+                <nav class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                        <li aria-current="page" class="breadcrumb-item active">Data Table</li>
+                    </ol>
+                </nav>
+
+                <div class="row">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div th:replace="alerts::categoryAlert"></div>
+
+                                <h6 class="card-title mb-2">All Information Categories</h6>
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addCategoryInformationModal">
+                                    Add Category
+                                </button>
+                                <!-- Add New Category Modal-->
+                                <div th:replace="components::addCategoryInformationModal"></div>
+
+                                <div class="table-responsive">
+                                    <table class="table" id="dataTableExample">
+                                        <thead>
+                                        <tr>
+                                            <th>Index</th>
+                                            <th>Category Name</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="category : ${categories}">
+                                            <td th:text="${category.id}"></td>
+                                            <td th:text="${category.name}"></td>
+                                            <td>
+                                                <span class="badge bg-success" th:if="${category.isActivated} == true">Active</span>
+                                                <span class="badge bg-danger" th:if="${category.isActivated} == false">Non-Active</span>
+                                            </td>
+                                            <td>
+                                                <a id="editButton" class="btn btn-primary btn-icon">
+                                                    <i data-feather="edit"></i>
+                                                </a>
+                                                <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true" th:fragment="editCategoryModal">
+                                                    <form method="PUT" th:action="@{/update-category}">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="mb-3">
+                                                                        <label for="categoryId" class="col-form-label">Category ID</label>
+                                                                        <input type="text" class="form-control" id="categoryId" name="id" readonly>
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <label for="categoryName" class="col-form-label">Category Name</label>
+                                                                        <input type="text" class="form-control" id="categoryName" name="name">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+<!--                                                <button type="button" class="btn btn-danger btn-icon" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal">-->
+<!--                                                    <i data-feather="x-square"></i>-->
+<!--                                                </button>-->
+<!--                                                <div th:replace="components::deleteCategoryModal"></div>-->
+                                                <a th:if="${category.isActivated} == false" th:href="@{/enable-postCategory/(id = ${category.id})}" id="enableButton" class="btn btn-success btn-icon">
+                                                    <i data-feather="check-square"></i>
+                                                </a>
+                                                <a th:if="${category.isDeleted} == false" th:href="@{/delete-postCategory/(id = ${category.id})}" id="deleteButton" class="btn btn-danger btn-icon">
+                                                    <i data-feather="trash-2"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <footer th:replace="fragments::footer"></footer>
+            </div>
+        </div>
+    </div>
+
+
+    <div th:replace="fragments::scripts">
+    </div>
+
+    <div th:replace="fragments::scripts-datatables">
+    </div>
+
+    <script th:src="@{/js/categories.js}"></script>
+
+</body>
+</html>

@@ -6,9 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rifqimuhammadaziz.Library.dto.PostDto;
-import rifqimuhammadaziz.Library.model.Category;
-import rifqimuhammadaziz.Library.model.Post;
-import rifqimuhammadaziz.Library.service.contract.CategoryService;
+import rifqimuhammadaziz.Library.model.PostCategory;
+import rifqimuhammadaziz.Library.service.contract.PostCategoryService;
 import rifqimuhammadaziz.Library.service.contract.PostService;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public class PostController {
     private PostService postService;
 
     @Autowired
-    private CategoryService categoryService;
+    private PostCategoryService postCategoryService;
 
     @GetMapping("/posts")
     public String posts(Model model) {
@@ -31,7 +30,7 @@ public class PostController {
 
     @GetMapping("/posts/create")
     public String createPostForm(Model model) {
-        List<Category> categories = categoryService.findAllByActivated();
+        List<PostCategory> categories = postCategoryService.findAllByActivated();
         model.addAttribute("categories", categories);
         model.addAttribute("post", new PostDto());
         return "posts/create-post";
@@ -52,7 +51,7 @@ public class PostController {
     @GetMapping("/update-post/{id}")
     public String updatePostForm(@PathVariable("id") Long id,
                                  Model model) {
-        List<Category> categories = categoryService.findAllByActivated();
+        List<PostCategory> categories = postCategoryService.findAllByActivated();
         PostDto postDto = postService.findById(id);
         model.addAttribute("categories", categories);
         model.addAttribute("postDto", postDto);

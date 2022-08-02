@@ -58,7 +58,7 @@
 
 
 	<div class="modal fade" id="deleteCategoryModal" tabindex="-1" aria-labelledby="deleteCategoryModalLabel" aria-hidden="true" th:fragment="deleteCategoryModal">
-		<form method="PUT" th:action="@{/delete-category}">
+		<form method="PUT" th:action="@{/delete-postCategory}">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -66,7 +66,7 @@
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
 					</div>
 					<div class="modal-body">
-						<p>Are you sure to delete category : [[${category.name}]]</p>
+						<p>Are you sure to delete postCategory : [[${postCategory.name}]]</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -76,6 +76,32 @@
 			</div>
 		</form>
 	</div>
+
+
+	<!-- Information Category -->
+	<div class="modal fade" id="addCategoryInformationModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true" th:fragment="addCategoryInformationModal">
+		<form method="POST" th:action="@{/informations/categories/create}" th:object="${newCategory}">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="addCategoryInformationModalLabel">Add New Category</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="btn-close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mb-3">
+							<label for="name" class="col-form-label">Category Name</label>
+							<input th:field="*{name}" type="text" class="form-control" id="name" name="name" required>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Add</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
 
 	<div th:replace="fragments::scripts">
 	</div>

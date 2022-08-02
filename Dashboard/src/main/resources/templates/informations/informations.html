@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments::head">
+</head>
+
+<body>
+
+  <div class="main-wrapper">
+    <nav th:replace="fragments::sidebar"></nav>
+
+    <div class="page-wrapper">
+      <div class="page-content">
+
+        <nav class="page-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Tables</a></li>
+            <li aria-current="page" class="breadcrumb-item active">Data Table</li>
+          </ol>
+        </nav>
+
+        <div class="row">
+          <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+
+                <div th:replace="alerts::postAlert"></div>
+
+                <h6 class="card-title">All Informations</h6>
+                <p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank">
+                  Official DataTables Documentation </a>for a full list of instructions and other
+                  options.
+                </p>
+                <div class="table-responsive">
+                  <table class="table" id="dataTableExample">
+                    <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Category</th>
+                      <th>Author</th>
+                      <th>Content</th>
+                      <th>Created Date</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="information : ${informations}">
+                      <td th:text="${#strings.abbreviate(information.title, 70)}"></td>
+                      <td th:text="${post.infoCategory.name}"></td>
+                      <td>On Progress</td>
+                      <td th:utext="${#strings.abbreviate(information.content,50)}"></td>
+                      <td>2 Mei 1999</td>
+                      <td>
+                        <span class="badge bg-success">Published</span>
+                        <span class="badge bg-warning">On Review</span>
+                        <span class="badge bg-danger">Archived</span>
+                      </td>
+                      <td>
+                        <a class="btn btn-warning btn-icon"
+                           th:href="@{/informations/preview/{id} (id = ${information.id})}"
+                           type="button">
+                          <i data-feather="eye"></i>
+                        </a>
+                        <a class="btn btn-primary btn-icon"
+                           th:href="@{/update-information/{id} (id = ${information.id})}"
+                           type="button">
+                          <i data-feather="edit"></i>
+                        </a>
+
+                        <a class="btn btn-danger btn-icon"
+                           th:href="@{/delete-information/(id = ${information.id})}"
+                           th:if="${information.isDeleted == false}"
+                           type="button">
+                          <i data-feather="trash"></i>
+                        </a>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer th:replace="fragments::footer"></footer>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="fragments::scripts">
+  </div>
+
+  <div th:replace="fragments::scripts-datatables">
+  </div>
+
+</body>
+</html>

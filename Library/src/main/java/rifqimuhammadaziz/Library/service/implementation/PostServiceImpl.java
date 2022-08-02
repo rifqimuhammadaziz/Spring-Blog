@@ -40,7 +40,7 @@ public class PostServiceImpl implements PostService {
         try {
             Post post = new Post();
             post.setTitle(postDto.getTitle());
-            post.setCategory(postDto.getCategory());
+            post.setPostCategory(postDto.getPostCategory());
             post.setContent(postDto.getContent());
             post.setDeleted(false);
             post.setPublished(false);
@@ -57,7 +57,7 @@ public class PostServiceImpl implements PostService {
         try {
             Post currentPost = postRepository.findById(postDto.getId()).get();
             currentPost.setTitle(postDto.getTitle());
-            currentPost.setCategory(postDto.getCategory());
+            currentPost.setPostCategory(postDto.getPostCategory());
             currentPost.setContent(postDto.getContent());
             return postRepository.save(currentPost);
         } catch (Exception e) {

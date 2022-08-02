@@ -10,8 +10,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name = "postcategories")
+public class PostCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class Category {
     private boolean isDeleted;
     private boolean isActivated;
 
-    public Category(String name) {
+    public PostCategory(String name) {
         this.name = name;
         this.isDeleted = false;
         this.isActivated = true;

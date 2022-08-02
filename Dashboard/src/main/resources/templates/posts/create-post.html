@@ -36,11 +36,11 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleFormControlSelect1" class="form-label">Category</label>
-                                        <select class="form-select" id="exampleFormControlSelect1" th:field="*{category}">
+                                        <select class="form-select" id="exampleFormControlSelect1" th:field="*{postCategory}">
                                             <option th:value="null" selected disabled>-- Select Category --</option>
-                                            <option th:each="category : ${categories}"
-                                                    th:value="${category.id}"
-                                                    th:text="${category.name}"></option>
+                                            <option th:each="postCategory : ${categories}"
+                                                    th:value="${postCategory.id}"
+                                                    th:text="${postCategory.name}"></option>
                                         </select>
                                     </div>
                                     <div class="mb-3">

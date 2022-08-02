@@ -13,34 +13,24 @@
 		<div class="page-wrapper">
 			<div class="page-content">
 
-				<nav class="page-breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Tables</a></li>
-						<li aria-current="page" class="breadcrumb-item active">Data Table</li>
-					</ol>
-				</nav>
-
 				<div class="row">
 					<div class="col-md-12 grid-margin stretch-card">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-title">Update Post : [[${postDto.title}]]</h4>
-								<p class="text-muted mb-3">Read the <a href="https://www.tiny.cloud/docs/" target="_blank">
-									Official TinyMCE Documentation </a>for a full list of instructions and other options.
-								</p>
+								<h4 class="card-title">Create New Information</h4>
 
-								<form class="forms-sample" th:action="@{/update-post/{id} (id = ${postDto.id})}" th:object="${postDto}" method="POST">
+								<form class="forms-sample" th:action="@{/informations/save-information}" th:object="${information}" method="POST">
 									<div class="mb-3">
 										<label for="title" class="form-label">Title</label>
 										<input type="text" class="form-control" id="title" autocomplete="off" placeholder="Post Title" th:field="*{title}">
 									</div>
 									<div class="mb-3">
 										<label for="exampleFormControlSelect1" class="form-label">Category</label>
-										<select class="form-select" id="exampleFormControlSelect1" th:field="*{postCategory}">
+										<select class="form-select" id="exampleFormControlSelect1" th:field="*{informationCategory}">
 											<option th:value="null" selected disabled>-- Select Category --</option>
-											<option th:each="postCategory : ${categories}"
-											        th:value="${postCategory.id}"
-											        th:text="${postCategory.name}"></option>
+											<option th:each="category : ${categories}"
+											        th:value="${category.id}"
+											        th:text="${category.name}"></option>
 										</select>
 									</div>
 									<div class="mb-3">
@@ -48,7 +38,10 @@
 										<textarea class="form-control" id="tinymceExample" name="tinymce" rows="10" th:field="*{content}"></textarea>
 									</div>
 
-									<button type="submit" class="btn btn-primary me-2">Update</button>
+									<div class="d-block">
+
+									</div>
+									<button type="submit" class="btn btn-primary me-2">Submit</button>
 									<button class="btn btn-secondary">Cancel</button>
 								</form>
 							</div>
