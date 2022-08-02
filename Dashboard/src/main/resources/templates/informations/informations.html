@@ -46,7 +46,7 @@
                     <tbody>
                     <tr th:each="information : ${informations}">
                       <td th:text="${#strings.abbreviate(information.title, 70)}"></td>
-                      <td th:text="${post.infoCategory.name}"></td>
+                      <td th:text="${information.informationCategory.name}"></td>
                       <td>On Progress</td>
                       <td th:utext="${#strings.abbreviate(information.content,50)}"></td>
                       <td>2 Mei 1999</td>

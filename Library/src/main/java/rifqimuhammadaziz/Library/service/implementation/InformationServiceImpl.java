@@ -30,12 +30,21 @@ public class InformationServiceImpl implements InformationService {
 
     @Override
     public InformationDto findById(Long id) {
-        return null;
+        Information information = informationRepository.findById(id).get();
+        InformationDto informationDto = mapperDto(information);
+        return informationDto;
     }
 
     @Override
     public Information save(InformationDto informationDto) {
-        return null;
+        try {
+            Information information = mapperEntity(informationDto);
+            System.out.println(information);
+            return informationRepository.save(information);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -56,5 +65,10 @@ public class InformationServiceImpl implements InformationService {
     private InformationDto mapperDto(Information information) {
         InformationDto informationDto = modelMapper.map(information, InformationDto.class);
         return informationDto;
+    }
+
+    private Information mapperEntity(InformationDto informationDto) {
+        Information information = modelMapper.map(informationDto, Information.class);
+        return information;
     }
 }
