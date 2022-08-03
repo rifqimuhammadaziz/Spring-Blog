@@ -26,10 +26,7 @@
                 <div th:replace="alerts::postAlert"></div>
 
                 <h6 class="card-title">All Informations</h6>
-                <p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank">
-                  Official DataTables Documentation </a>for a full list of instructions and other
-                  options.
-                </p>
+
                 <div class="table-responsive">
                   <table class="table" id="dataTableExample">
                     <thead>
@@ -51,9 +48,8 @@
                       <td th:utext="${#strings.abbreviate(information.content,50)}"></td>
                       <td>2 Mei 1999</td>
                       <td>
-                        <span class="badge bg-success">Published</span>
-                        <span class="badge bg-warning">On Review</span>
-                        <span class="badge bg-danger">Archived</span>
+                        <span class="badge bg-success" th:if="${information.isDeleted == false}">Published</span>
+                        <span class="badge bg-danger" th:if="${information.isDeleted == true}">Archived</span>
                       </td>
                       <td>
                         <a class="btn btn-warning btn-icon"
@@ -62,13 +58,13 @@
                           <i data-feather="eye"></i>
                         </a>
                         <a class="btn btn-primary btn-icon"
-                           th:href="@{/update-information/{id} (id = ${information.id})}"
+                           th:href="@{/informations/update/{id} (id = ${information.id})}"
                            type="button">
                           <i data-feather="edit"></i>
                         </a>
 
                         <a class="btn btn-danger btn-icon"
-                           th:href="@{/delete-information/(id = ${information.id})}"
+                           th:href="@{/information/delete/(id = ${information.id})}"
                            th:if="${information.isDeleted == false}"
                            type="button">
                           <i data-feather="trash"></i>

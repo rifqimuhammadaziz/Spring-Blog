@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments::head">
+	<!-- Plugin css for this page -->
+	<link th:href="@{/vendors/simplemde/simplemde.min.css}" rel="stylesheet">
+	<!-- End plugin css for this page -->
+</head>
+<body>
+
+	<div class="main-wrapper">
+		<nav th:replace="fragments::sidebar"></nav>
+
+		<div class="page-wrapper">
+			<div class="page-content">
+
+				<div class="row">
+					<div class="col-md-12 grid-margin stretch-card">
+						<div class="card">
+							<div class="card-body">
+								<h2 class="card-title">Update Information : <strong>[[${information.title}]]</strong></h2>
+
+								<form class="forms-sample" th:action="@{/informations/update/{id} (id = ${information.id})}" th:object="${information}" method="POST">
+									<div class="mb-3">
+										<label for="title" class="form-label">Title</label>
+										<input type="text" class="form-control" id="title" autocomplete="off" placeholder="Information Title" th:field="*{title}">
+									</div>
+									<div class="mb-3">
+										<label for="exampleFormControlSelect1" class="form-label">Category</label>
+										<select class="form-select" id="exampleFormControlSelect1" th:field="*{informationCategory}">
+											<option th:value="null" selected disabled>-- Select Category --</option>
+											<option th:each="category : ${categories}"
+											        th:value="${category.id}"
+											        th:text="${category.name}"></option>
+										</select>
+									</div>
+									<div class="mb-3">
+										<label for="tinymceExample" class="form-label">Content</label>
+										<textarea class="form-control" id="tinymceExample" name="tinymce" rows="10" th:field="*{content}"></textarea>
+									</div>
+
+									<div class="d-block">
+
+									</div>
+									<button type="submit" class="btn btn-primary me-2">Update</button>
+									<button class="btn btn-secondary">Cancel</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<footer th:replace="fragments::footer"></footer>
+		</div>
+	</div>
+
+	<!-- core:js -->
+	<script th:src="@{/vendors/core/core.js}"></script>
+	<!-- endinject -->
+
+	<!-- Plugin js for this page -->
+	<script th:src="@{/vendors/tinymce/tinymce.min.js}"></script>
+	<script th:src="@{/vendors/simplemde/simplemde.min.js}"></script>
+	<script th:src="@{/vendors/ace-builds/src-min/ace.js}"></script>
+	<script th:src="@{/vendors/ace-builds/src-min/theme-chaos.js}"></script>
+	<!-- End plugin js for this page -->
+
+	<!-- inject:js -->
+	<script th:src="@{/vendors/feather-icons/feather.min.js}"></script>
+	<script th:src="@{/js/template.js}"></script>
+	<!-- endinject -->
+
+	<!-- Custom js for this page -->
+	<script th:src="@{/js/tinymce.js}"></script>
+	<script th:src="@{/js/simplemde.js}"></script>
+	<script th:src="@{/js/ace.js}"></script>
+	<!-- End custom js for this page -->
+
+</body>
+</html>

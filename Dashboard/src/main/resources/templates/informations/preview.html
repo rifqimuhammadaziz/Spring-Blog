@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments::head">
+</head>
+
+<body>
+
+	<div class="main-wrapper">
+		<nav th:replace="fragments::sidebar"></nav>
+
+		<div class="page-wrapper">
+			<div class="page-content">
+
+				<nav class="page-breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#">Tables</a></li>
+						<li aria-current="page" class="breadcrumb-item active">Data Table</li>
+					</ol>
+				</nav>
+
+				<div class="row">
+					<div class="col-md-12 grid-margin stretch-card">
+						<div class="card">
+							<div class="card-body">
+
+								<div class="alert alert-success text-center" role="alert" th:if="${information.isDeleted == false}">
+									<h4 class="alert-heading">Published</h4>
+									<p><strong>The Information</strong> is published and can be accessed publicly in blog.</p>
+									<hr>
+									<p class="mb-0">After the post is declared published by the admin, then you can no longer edit it</p>
+								</div>
+
+								<div class="alert alert-danger text-center" role="alert" th:if="${information.isDeleted == true}">
+									<h4 class="alert-heading">Archived</h4>
+									<p><strong>The Post</strong> is archived and no longer seen on blog</p>
+									<hr>
+									<p class="mb-0">After the post is declared published by the admin, then you can no longer edit it</p>
+								</div>
+
+								<div class="card mb-3">
+									<div class="card-header text-center">
+										<h3 class="mb-2">[[${information.title}]]</h3>
+										<h5 class="text-muted mb-2">[[${information.informationCategory.name}]]</h5>
+									</div>
+									<div class="card-body">
+										<p>[(${information.content})]</p>
+									</div>
+								</div>
+
+								<div class="d-grid gap-2">
+									<a class="btn btn-secondary btn-icon-text" th:if="${information.isDeleted == false}" th:href="@{/informations/update/{id} (id = ${information.id})}"><i class="btn-icon-prepend" data-feather="edit"></i>Edit</a>
+									<a class="btn btn-danger btn-icon-text" th:if="${information.isDeleted == false}" th:href="@{/information/delete/(id = ${information.id})}"><i class="btn-icon-prepend" data-feather="archive"></i>Archive Post</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<footer th:replace="fragments::footer"></footer>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments::scripts">
+	</div>
+
+</body>
+</html>

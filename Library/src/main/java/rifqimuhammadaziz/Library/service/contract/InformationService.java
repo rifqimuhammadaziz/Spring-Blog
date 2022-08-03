@@ -12,5 +12,4 @@ public interface InformationService {
     Information save(InformationDto informationDto);
     Information update(InformationDto informationDto);
     void deleteById(Long id);
-    void publishById(Long id);
 }

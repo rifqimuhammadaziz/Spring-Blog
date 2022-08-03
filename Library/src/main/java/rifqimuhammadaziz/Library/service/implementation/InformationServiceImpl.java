@@ -49,16 +49,20 @@ public class InformationServiceImpl implements InformationService {
 
     @Override
     public Information update(InformationDto informationDto) {
-        return null;
+        try {
+            Information currentInformation = informationRepository.findById(informationDto.getId()).get();
+            currentInformation.setTitle(informationDto.getTitle());
+            currentInformation.setInformationCategory(informationDto.getInformationCategory());
+            currentInformation.setContent(informationDto.getContent());
+            return informationRepository.save(currentInformation);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public void deleteById(Long id) {
-
-    }
-
-    @Override
-    public void publishById(Long id) {
 
     }
 
