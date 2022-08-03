@@ -5,21 +5,21 @@
 
 <body>
 
-	<div th:fragment="categoryAlert">
+	<div th:fragment="postCategoryAlert">
 		<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${createSuccess}">
-			<strong th:text="${createSuccess}"></strong> Try to add post with the postCategory.
+			<strong th:text="${createSuccess}"></strong> Try to add post with the category.
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
 		</div>
 		<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${updateSuccess}">
-			<strong th:text="${updateSuccess}"></strong> Check the post with this postCategory.
+			<strong th:text="${updateSuccess}"></strong> Check the post with this category.
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
 		</div>
 		<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${enableSuccess}">
-			<strong th:text="${enableSuccess}"></strong> Now post can be created with this postCategory.
+			<strong th:text="${enableSuccess}"></strong> Now post can be created with this category.
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
 		</div>
 		<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${deleteSuccess}">
-			<strong th:text="${deleteSuccess}"></strong> Existing post is not deleted, but cannot create with this postCategory.
+			<strong th:text="${deleteSuccess}"></strong> Existing post is not deleted, but cannot create with this category.
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
 		</div>
 	</div>

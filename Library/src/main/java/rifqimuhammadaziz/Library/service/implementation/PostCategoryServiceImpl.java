@@ -23,6 +23,7 @@ public class PostCategoryServiceImpl implements PostCategoryService {
     public PostCategory save(PostCategory postCategory) {
         try {
             PostCategory newPostCategory = new PostCategory(postCategory.getName());
+            newPostCategory.setActivated(true);
             return postCategoryRepository.save(newPostCategory);
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,8 +42,6 @@ public class PostCategoryServiceImpl implements PostCategoryService {
         try {
             currentPostCategory = postCategoryRepository.findById(postCategory.getId()).get();
             currentPostCategory.setName(postCategory.getName());
-            currentPostCategory.setActivated(postCategory.isActivated());
-            currentPostCategory.setDeleted(postCategory.isDeleted());
         } catch (Exception e) {
             e.printStackTrace();
         }

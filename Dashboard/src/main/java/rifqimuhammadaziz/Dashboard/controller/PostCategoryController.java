@@ -25,8 +25,8 @@ public class PostCategoryController {
         return "posts/categories";
     }
 
-    @PostMapping("/add-category")
-    private String add(@ModelAttribute("newCategory") PostCategory postCategory, RedirectAttributes attributes) {
+    @PostMapping("/posts/categories/save")
+    private String save(@ModelAttribute("newCategory") PostCategory postCategory, RedirectAttributes attributes) {
         try {
             postCategoryService.save(postCategory);
             attributes.addFlashAttribute("createSuccess", "New Category Added!");
@@ -40,13 +40,13 @@ public class PostCategoryController {
         return "redirect:/posts/categories";
     }
 
-    @RequestMapping(value = "/findById", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "/posts/categories/update", method = {RequestMethod.PUT, RequestMethod.GET})
     @ResponseBody
     public PostCategory findById(Long id) {
         return postCategoryService.findById(id);
     }
 
-    @GetMapping("/update-category")
+    @GetMapping("/posts/categories/update-category")
     public String update(PostCategory postCategory, RedirectAttributes attributes) {
         try {
             postCategoryService.update(postCategory);
@@ -58,7 +58,7 @@ public class PostCategoryController {
             e.printStackTrace();
             attributes.addFlashAttribute("updateFailed", "Error server");
         }
-        return "redirect:/categories";
+        return "redirect:/posts/categories";
     }
 
     @RequestMapping(value = "/delete-category", method = {RequestMethod.PUT, RequestMethod.GET})
