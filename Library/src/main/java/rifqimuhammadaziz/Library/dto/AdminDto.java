@@ -21,5 +21,5 @@ public class AdminDto {
 
     @Size(min = 5, max = 20, message = "Invalid Password! (3-20 Characters)")
     private String password;
-    private String repeatPassword;
+    private String retypePassword;
 }

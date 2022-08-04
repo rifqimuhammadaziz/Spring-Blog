@@ -18,23 +18,38 @@
 								</div>
 								<div class="col-md-8 ps-md-0">
 									<div class="auth-form-wrapper px-4 py-5">
+
+										<div th:replace="alerts::registerAlert"></div>
+
 										<a class="noble-ui-logo d-block mb-2" href="#">Noble<span>UI</span></a>
 										<h5 class="text-muted fw-normal mb-4">Create a free account.</h5>
-										<form class="forms-sample">
+
+										<form class="forms-sample" method="POST" th:object="${admin}" th:action="@{/do-register}">
 											<div class="mb-3">
-												<label class="form-label" for="exampleInputUsername1">Username</label>
-												<input autocomplete="Username" class="form-control" id="exampleInputUsername1"
-												       placeholder="Username" type="text">
+												<label class="form-label" for="firstName">First Name</label>
+												<input autocomplete="firstName" class="form-control" id="firstName"
+												       placeholder="First Name" type="text" th:field="*{firstName}">
 											</div>
 											<div class="mb-3">
-												<label class="form-label" for="userEmail">Email address</label>
-												<input class="form-control" id="userEmail" placeholder="Email"
-												       type="email">
+												<label class="form-label" for="lastName">Last Name</label>
+												<input autocomplete="lastName" class="form-control" id="lastName"
+												       placeholder="Last Name" type="text" th:field="*{lastName}">
 											</div>
 											<div class="mb-3">
-												<label class="form-label" for="userPassword">Password</label>
-												<input autocomplete="current-password" class="form-control" id="userPassword"
-												       placeholder="Password" type="password">
+												<label class="form-label" for="username">Email address</label>
+												<input class="form-control" id="username" placeholder="Email"
+												       type="email" th:field="*{email}">
+											</div>
+											<div class="mb-3">
+												<label class="form-label" for="password">Password</label>
+												<input autocomplete="password" class="form-control" id="password"
+												       placeholder="Password" type="password" th:field="*{password}">
+											</div>
+
+											<div class="mb-3">
+												<label class="form-label" for="retypePassword">Retype Password</label>
+												<input autocomplete="retypePassword" class="form-control" id="retypePassword"
+												       placeholder="Password" type="password" th:field="*{retypePassword}">
 											</div>
 											<div class="form-check mb-3">
 												<input class="form-check-input" id="authCheck" type="checkbox">
@@ -43,8 +58,8 @@
 												</label>
 											</div>
 											<div>
-												<a class="btn btn-primary text-white me-2 mb-2 mb-md-0"
-												   href="../../dashboard.html">Sign up</a>
+												<button type="submit" class="btn btn-primary text-white me-2 mb-2 mb-md-0"
+												   href="">Register</button>
 												<button class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0"
 												        type="button">
 													<i class="btn-icon-prepend" data-feather="twitter"></i>
