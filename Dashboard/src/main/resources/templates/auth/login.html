@@ -9,20 +9,15 @@
 			<div class="page-content d-flex align-items-center justify-content-center">
 
 				<div class="row w-100 mx-0 auth-page">
-					<div class="col-md-8 col-xl-6 mx-auto">
+					<div class="col-md-8 col-xl-4 mx-auto">
 						<div class="card">
 							<div class="row">
-								<div class="col-md-4 pe-md-0">
-									<div class="auth-side-wrapper">
-										Test
-									</div>
-								</div>
-								<div class="col-md-8 ps-md-0">
+								<div class="col-md-12 ps-md-4">
 									<div class="auth-form-wrapper px-4 py-5">
 
 										<div th:replace="alerts::registerAlert"></div>
 
-										<a href="#" class="noble-ui-logo d-block mb-2">Noble<span>UI</span></a>
+										<a href="#" class="noble-ui-logo d-block mb-2">Login<span>Dashboard</span></a>
 										<h5 class="text-muted fw-normal mb-4">Welcome back! Log in to your account.</h5>
 
 										<form class="forms-sample">
@@ -43,11 +38,11 @@
 												</label>
 											</div>
 											<div>
-												<a href="#" class="btn btn-primary me-2 mb-2 mb-md-0 text-white">Login</a>
-												<button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
+												<button type="submit" href="#" class="btn btn-primary me-2 mb-2 mb-md-0 text-white">Login</button>
+												<a class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0" th:href="@{/register}">
 													<i class="btn-icon-prepend" data-feather="user"></i>
 													Register Account
-												</button>
+												</a>
 											</div>
 										</form>
 									</div>
