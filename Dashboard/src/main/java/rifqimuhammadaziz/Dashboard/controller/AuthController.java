@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rifqimuhammadaziz.Library.dto.AdminDto;
 import rifqimuhammadaziz.Library.model.Admin;
 import rifqimuhammadaziz.Library.service.contract.AdminService;
@@ -41,27 +42,38 @@ public class AuthController {
     public String register(@Valid @ModelAttribute("admin") AdminDto adminDto,
                            BindingResult result,
                            Model model,
-                           HttpSession session) {
+                           HttpSession session,
+                           RedirectAttributes attributes) {
         try {
+            // Validate Field
+            if (result.hasErrors()) {
+                model.addAttribute("admin", adminDto);
+                result.toString();
+                return "auth/register";
+            }
+
+            // Check User Exists
             Admin admin = adminService.findByEmail(adminDto.getEmail());
             if (admin != null) {
                 model.addAttribute("admin", adminDto);
-                session.setAttribute("registerFailed", "Failed to register, email has been registered. Please use another email.");
+                attributes.addFlashAttribute("registerFailed", "Failed to register, email has been registered. Please use another email.");
                 System.out.println(admin);
-                return "register";
+                return "redirect:/register";
             }
+
+            // Check Equals Password
             if (adminDto.getPassword().equals(adminDto.getRetypePassword())) {
                 adminDto.setPassword(passwordEncoder.encode(adminDto.getPassword()));
                 adminService.save(adminDto);
                 log.info("Register Success");
-                session.setAttribute("registerSuccess", "Sucessfully register new account");
+                attributes.addFlashAttribute("registerSuccess", "Sucessfully register new account.");
                 model.addAttribute("admin", adminDto);
-                return "auth/login";
+                return "redirect:/login";
             } else {
                 model.addAttribute("admin", adminDto);
-                model.addAttribute("passwordError", "Retype Password is invalid, please check again!");
+                attributes.addFlashAttribute("passwordError", "Retype Password is invalid, please check again!");
                 log.warn("Retype Password Error");
-                return "auth/register";
+                return "redirect:/register";
             }
         } catch (Exception e) {
             e.printStackTrace();

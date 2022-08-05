@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 @Data
@@ -11,15 +12,16 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class AdminDto {
 
-    @Size(min = 3, max = 20, message = "Invalid First Name! (3-20 Characters)")
+    @Size(min = 3, max = 20, message = "First Name must be 3-20 characters")
     private String firstName;
 
-    @Size(min = 3, max = 20, message = "Invalid Last Name! (3-20 Characters)")
+    @Size(min = 3, max = 20, message = "Last Name must be 3-20 characters")
     private String lastName;
 
+    @Email(message = "Wrong email format")
     private String email;
 
-    @Size(min = 5, max = 20, message = "Invalid Password! (3-20 Characters)")
+    @Size(min = 5, max = 20, message = "Password must be 5-20 characters")
     private String password;
     private String retypePassword;
 }
