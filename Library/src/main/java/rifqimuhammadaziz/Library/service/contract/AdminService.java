@@ -4,6 +4,7 @@ import rifqimuhammadaziz.Library.dto.AdminDto;
 import rifqimuhammadaziz.Library.model.Admin;
 
 public interface AdminService {
-    Admin findByEmail(String email);
+//    Admin findByEmail(String email);
+    Admin findByUsername(String username);
     Admin save(AdminDto adminDto);
 }

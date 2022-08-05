@@ -19,7 +19,7 @@ public class AdminDto {
     private String lastName;
 
     @Email(message = "Wrong email format")
-    private String email;
+    private String username;
 
     @Size(min = 5, max = 20, message = "Password must be 5-20 characters")
     private String password;

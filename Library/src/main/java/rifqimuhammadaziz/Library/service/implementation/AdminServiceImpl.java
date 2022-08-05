@@ -20,9 +20,16 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private RoleRepository roleRepository;
 
+//    @Override
+//    public Admin findByEmail(String email) {
+//        Admin admin = adminRepository.findByEmail(email);
+//        System.out.println(admin);
+//        return admin;
+//    }
+
     @Override
-    public Admin findByEmail(String email) {
-        return adminRepository.findByEmail(email);
+    public Admin findByUsername(String username) {
+        return adminRepository.findByUsername(username);
     }
 
     @Override
@@ -32,11 +39,10 @@ public class AdminServiceImpl implements AdminService {
         if (role != null) {
             admin.setFirstName(adminDto.getFirstName());
             admin.setLastName(adminDto.getLastName());
-            admin.setEmail(adminDto.getEmail());
+            admin.setUsername(adminDto.getUsername());
             admin.setPassword(adminDto.getPassword());
             admin.setRoles(Arrays.asList(roleRepository.findByName("ADMIN")));
-            return adminRepository.save(admin);
         }
-        return null;
+        return adminRepository.save(admin);
     }
 }

@@ -42,13 +42,14 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/dashboard/*").hasAuthority("ADMIN")
+                .antMatchers("/*").permitAll()
+                .antMatchers("/dashboard/*")
+                .hasAuthority("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/do-login")
-                .defaultSuccessUrl("/dashboard")
+                .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
                 .logout()

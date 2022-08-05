@@ -28,7 +28,8 @@ public class AuthController {
     private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
-    public String loginForm() {
+    public String login(Model model) {
+        model.addAttribute("admin", new AdminDto());
         return "auth/login";
     }
 
@@ -53,7 +54,7 @@ public class AuthController {
             }
 
             // Check User Exists
-            Admin admin = adminService.findByEmail(adminDto.getEmail());
+            Admin admin = adminService.findByUsername(adminDto.getUsername());
             if (admin != null) {
                 model.addAttribute("admin", adminDto);
                 attributes.addFlashAttribute("registerFailed", "Failed to register, email has been registered. Please use another email.");

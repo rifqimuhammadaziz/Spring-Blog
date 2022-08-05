@@ -24,10 +24,10 @@
 											<div class="mb-3">
 												<label class="form-label" for="username">Email address</label>
 												<input class="form-control" id="username" placeholder="Email"
-												       required th:field="*{email}" type="email">
+												       required th:field="*{username}" type="email">
 												<span class="badge border border-danger text-danger mt-2"
-												      th:if="${#fields.hasErrors('email')}"
-												      th:errors="*{email}"></span>
+												      th:if="${#fields.hasErrors('username')}"
+												      th:errors="*{username}"></span>
 											</div>
 											<div class="row">
 												<div class="col-sm-6">

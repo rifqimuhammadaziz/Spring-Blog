@@ -15,31 +15,46 @@
 								<div class="col-md-12 ps-md-4">
 									<div class="auth-form-wrapper px-4 py-5">
 
+										<div class="alert alert-danger text-center" th:if="${param.error}">
+											<p>Invalid Username or Password</p>
+										</div>
+										<div class="alert alert-danger text-center" th:if="${param.logout}">
+											<p>You have been logged out</p>
+										</div>
+
 										<div th:replace="alerts::registerAlert"></div>
 
-										<a href="#" class="noble-ui-logo d-block mb-2">Login<span>Dashboard</span></a>
+										<a class="noble-ui-logo d-block mb-2" href="#">Login<span>Dashboard</span></a>
 										<h5 class="text-muted fw-normal mb-4">Welcome back! Log in to your account.</h5>
 
-										<form class="forms-sample">
+										<form class="forms-sample" method="POST" th:action="@{/do-login}" th:object="${admin}">
 											<div class="mb-3">
-												<label for="userEmail" class="form-label">Email address</label>
-												<input type="email" class="form-control" id="userEmail"
-												       placeholder="Email">
+												<label class="form-label" for="username">Email address</label>
+												<input class="form-control" id="username" placeholder="Email" type="email" th:field="*{username}">
+<!--												<span class="badge border border-danger text-danger mt-2"-->
+<!--												      th:errors="*{email}"-->
+<!--												      th:if="${#fields.hasErrors('email')}"></span>-->
 											</div>
 											<div class="mb-3">
-												<label for="userPassword" class="form-label">Password</label>
-												<input type="password" class="form-control" id="userPassword"
-												       autocomplete="current-password" placeholder="Password">
+												<label class="form-label" for="password">Password</label>
+												<input autocomplete="current-password" class="form-control" id="password" name="password" th:field="*{password}"
+												       placeholder="Password" type="password">
+<!--												<span class="badge border border-danger text-danger mt-2"-->
+<!--												      th:errors="*{password}"-->
+<!--												      th:if="${#fields.hasErrors('password')}"></span>-->
 											</div>
 											<div class="form-check mb-3">
-												<input type="checkbox" class="form-check-input" id="authCheck">
+												<input class="form-check-input" id="authCheck" type="checkbox">
 												<label class="form-check-label" for="authCheck">
 													Remember me
 												</label>
 											</div>
 											<div>
-												<button type="submit" href="#" class="btn btn-primary me-2 mb-2 mb-md-0 text-white">Login</button>
-												<a class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0" th:href="@{/register}">
+												<button class="btn btn-primary me-2 mb-2 mb-md-0 text-white"
+												        type="submit">Login
+												</button>
+												<a class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0"
+												   th:href="@{/register}">
 													<i class="btn-icon-prepend" data-feather="user"></i>
 													Register Account
 												</a>
