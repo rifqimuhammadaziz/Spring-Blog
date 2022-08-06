@@ -2,6 +2,7 @@ package rifqimuhammadaziz.Dashboard.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import rifqimuhammadaziz.Library.service.contract.AdminService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @Slf4j
@@ -28,9 +30,16 @@ public class AuthController {
     private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("admin", new AdminDto());
-        return "auth/login";
+    public String login(Model model, Authentication authentication) {
+        if (authentication != null) {
+            Admin admin = adminService.findByUsername(authentication.getName());
+            System.out.println(admin);
+            System.out.println(authentication.getPrincipal());
+            return "redirect:/";
+        } else {
+            model.addAttribute("admin", new AdminDto());
+            return "auth/login";
+        }
     }
 
     @GetMapping("/register")

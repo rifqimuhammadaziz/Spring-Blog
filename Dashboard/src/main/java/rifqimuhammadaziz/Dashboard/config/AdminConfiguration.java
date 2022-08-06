@@ -43,8 +43,6 @@ public class AdminConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/*").permitAll()
-                .antMatchers("/dashboard/*")
-                .hasAuthority("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login")
