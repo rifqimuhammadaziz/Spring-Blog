@@ -5,15 +5,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import rifqimuhammadaziz.Library.dto.AdminLoginDetails;
 import rifqimuhammadaziz.Library.dto.PostDto;
 import rifqimuhammadaziz.Library.model.PostCategory;
+import rifqimuhammadaziz.Library.service.contract.AdminService;
 import rifqimuhammadaziz.Library.service.contract.PostCategoryService;
 import rifqimuhammadaziz.Library.service.contract.PostService;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class PostController {
+
+    @Autowired
+    private AdminService adminService;
 
     @Autowired
     private PostService postService;
@@ -22,17 +29,41 @@ public class PostController {
     private PostCategoryService postCategoryService;
 
     @GetMapping("/posts")
-    public String posts(Model model) {
-        List<PostDto> posts = postService.findAll();
-        model.addAttribute("posts", posts);
+    public String posts(Principal principal, HttpSession session, Model model) {
+        if (principal != null) {
+            // Get Login Details
+            AdminLoginDetails admin = adminService.getLoginDetails(principal.getName());
+            model.addAttribute("admin", admin);
+            System.out.println(admin);
+            session.setAttribute("username", principal.getName());
+
+            // Find All Posts
+            List<PostDto> posts = postService.findAll();
+            model.addAttribute("posts", posts);
+        } else {
+            session.removeAttribute("username");
+            return "redirect:/login";
+        }
         return "posts/posts";
     }
 
     @GetMapping("/posts/create")
-    public String createPostForm(Model model) {
-        List<PostCategory> categories = postCategoryService.findAllByActivated();
-        model.addAttribute("categories", categories);
-        model.addAttribute("post", new PostDto());
+    public String createPostForm(Principal principal, HttpSession session, Model model) {
+        if (principal != null) {
+            // Get Login Details
+            AdminLoginDetails admin = adminService.getLoginDetails(principal.getName());
+            model.addAttribute("admin", admin);
+            System.out.println(admin);
+            session.setAttribute("username", principal.getName());
+
+            // Create New Post
+            List<PostCategory> categories = postCategoryService.findAllByActivated();
+            model.addAttribute("categories", categories);
+            model.addAttribute("post", new PostDto());
+        } else {
+            session.removeAttribute("username");
+            return "redirect:/login";
+        }
         return "posts/create-post";
     }
 
@@ -97,9 +128,21 @@ public class PostController {
     }
 
     @GetMapping(value = "/posts/preview/{id}")
-    public String previewPost(@PathVariable("id") Long id, Model model) {
-        PostDto postDto = postService.findById(id);
-        model.addAttribute("postDto", postDto);
+    public String previewPost(@PathVariable("id") Long id, Principal principal, HttpSession session, Model model) {
+        if (principal != null) {
+            // Get Login Details
+            AdminLoginDetails admin = adminService.getLoginDetails(principal.getName());
+            model.addAttribute("admin", admin);
+            System.out.println(admin);
+            session.setAttribute("username", principal.getName());
+
+            // Find Post By ID
+            PostDto postDto = postService.findById(id);
+            model.addAttribute("postDto", postDto);
+        } else {
+            session.removeAttribute("username");
+            return "redirect:/login";
+        }
         return "/posts/preview-post";
     }
 }

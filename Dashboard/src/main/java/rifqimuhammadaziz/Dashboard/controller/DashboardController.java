@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rifqimuhammadaziz.Library.dto.AdminLoginDetails;
-import rifqimuhammadaziz.Library.model.Admin;
 import rifqimuhammadaziz.Library.service.contract.AdminService;
 
 import javax.servlet.http.HttpSession;
@@ -23,7 +22,6 @@ public class DashboardController {
         if (principal != null) {
             AdminLoginDetails admin = adminService.getLoginDetails(principal.getName());
             model.addAttribute("admin", admin);
-            System.out.println(admin);
 
             session.setAttribute("username", principal.getName());
         } else {

@@ -13,6 +13,6 @@ public class AdminLoginDetails {
     private String username;
 
     public String fullName() {
-        return firstName + lastName;
+        return firstName + " " + lastName;
     }
 }
