@@ -68,4 +68,9 @@ public class PostCategoryServiceImpl implements PostCategoryService {
     public List<PostCategory> findAllByActivated() {
         return postCategoryRepository.findAllByActivated();
     }
+
+    @Override
+    public boolean existByName(String name) {
+        return postCategoryRepository.existsByName(name);
+    }
 }

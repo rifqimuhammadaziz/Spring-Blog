@@ -10,13 +10,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "postcategories")
+@Table(
+        name = "postcategories",
+        uniqueConstraints = @UniqueConstraint(columnNames = "name")
+)
 public class PostCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
     private boolean isDeleted;
     private boolean isActivated;

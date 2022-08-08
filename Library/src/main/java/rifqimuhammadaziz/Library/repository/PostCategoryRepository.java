@@ -12,4 +12,6 @@ public interface PostCategoryRepository extends JpaRepository<PostCategory, Long
 
     @Query("SELECT c FROM PostCategory c WHERE c.isActivated = TRUE AND c.isDeleted = FALSE")
     List<PostCategory> findAllByActivated();
+
+    boolean existsByName(String name);
 }

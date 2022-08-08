@@ -10,6 +10,10 @@
 			<strong th:text="${createSuccess}"></strong> Try to add post with the category.
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
 		</div>
+		<div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${createFailed}">
+			<strong th:text="${createFailed}"></strong> Create another category.
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+		</div>
 		<div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${updateSuccess}">
 			<strong th:text="${updateSuccess}"></strong> Check the post with this category.
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>

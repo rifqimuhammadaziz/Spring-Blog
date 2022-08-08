@@ -13,4 +13,6 @@ public interface PostCategoryService {
     void deleteById(Long id);
     void enableById(Long id);
     List<PostCategory> findAllByActivated();
+
+    boolean existByName(String name);
 }
