@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments::head">
+</head>
+<body>
+	<div class="main-wrapper">
+		<div class="page-wrapper full-page">
+			<div class="page-content d-flex align-items-center justify-content-center">
+
+				<div class="row w-100 mx-0 auth-page">
+					<div class="col-md-8 col-xl-6 mx-auto d-flex flex-column align-items-center">
+						<img alt="404" class="img-fluid mb-2" th:src="@{/images/others/404.svg}">
+						<h1 class="fw-bolder mb-22 mt-2 tx-80 text-muted">500</h1>
+						<h4 class="mb-2">Internal server error</h4>
+						<h6 class="text-muted mb-3 text-center">Oopps!! There wan an error. Please try agin later.</h6>
+						<a th:href="@{/}">Back to home</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments::scripts"></div>
+</body>
+</html>
