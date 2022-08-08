@@ -6,8 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import rifqimuhammadaziz.Library.dto.AdminLoginDetails;
-import rifqimuhammadaziz.Library.dto.PostDto;
+import rifqimuhammadaziz.Library.dto.AdminBasicInformation;
 import rifqimuhammadaziz.Library.model.PostCategory;
 import rifqimuhammadaziz.Library.service.contract.AdminService;
 import rifqimuhammadaziz.Library.service.contract.PostCategoryService;
@@ -29,7 +28,7 @@ public class PostCategoryController {
     public String categories(Principal principal, HttpSession session, Model model) {
         if (principal != null) {
             // Get Login Details
-            AdminLoginDetails admin = adminService.getLoginDetails(principal.getName());
+            AdminBasicInformation admin = adminService.getLoginDetails(principal.getName());
             model.addAttribute("admin", admin);
             System.out.println(admin);
             session.setAttribute("username", principal.getName());

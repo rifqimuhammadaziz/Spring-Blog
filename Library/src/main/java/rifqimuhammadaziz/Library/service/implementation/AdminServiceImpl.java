@@ -1,16 +1,19 @@
 package rifqimuhammadaziz.Library.service.implementation;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rifqimuhammadaziz.Library.dto.AdminDto;
-import rifqimuhammadaziz.Library.dto.AdminLoginDetails;
+import rifqimuhammadaziz.Library.dto.AdminBasicInformation;
 import rifqimuhammadaziz.Library.model.Admin;
 import rifqimuhammadaziz.Library.model.Role;
 import rifqimuhammadaziz.Library.repository.AdminRepository;
 import rifqimuhammadaziz.Library.repository.RoleRepository;
 import rifqimuhammadaziz.Library.service.contract.AdminService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -21,6 +24,9 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
 //    @Override
 //    public Admin findByEmail(String email) {
 //        Admin admin = adminRepository.findByEmail(email);
@@ -29,18 +35,32 @@ public class AdminServiceImpl implements AdminService {
 //    }
 
     @Override
+    public List<AdminBasicInformation> findAll() {
+        List<AdminBasicInformation> admins = new ArrayList<>();
+        for (Admin admin : adminRepository.findAll()) {
+            AdminBasicInformation details = mapperDetails(admin);
+            admins.add(details);
+        }
+        return admins;
+    }
+
+    public List<Admin> findAllAdmin() {
+        return adminRepository.findAll();
+    }
+
+    @Override
     public Admin findByUsername(String username) {
         return adminRepository.findByUsername(username);
     }
 
     @Override
-    public AdminLoginDetails getLoginDetails(String username) {
-        AdminLoginDetails adminLoginDetails = new AdminLoginDetails();
+    public AdminBasicInformation getLoginDetails(String username) {
+        AdminBasicInformation adminBasicInformation = new AdminBasicInformation();
         Admin admin = adminRepository.findByUsername(username);
-        adminLoginDetails.setUsername(admin.getUsername());
-        adminLoginDetails.setFirstName(admin.getFirstName());
-        adminLoginDetails.setLastName(admin.getLastName());
-        return adminLoginDetails;
+        adminBasicInformation.setUsername(admin.getUsername());
+        adminBasicInformation.setFirstName(admin.getFirstName());
+        adminBasicInformation.setLastName(admin.getLastName());
+        return adminBasicInformation;
     }
 
     @Override
@@ -55,5 +75,15 @@ public class AdminServiceImpl implements AdminService {
             admin.setRoles(Arrays.asList(roleRepository.findByName("ADMIN")));
         }
         return adminRepository.save(admin);
+    }
+
+    public Admin mapperEntity(AdminBasicInformation adminBasicInformation) {
+        Admin admin = modelMapper.map(adminBasicInformation, Admin.class);
+        return admin;
+    }
+
+    public AdminBasicInformation mapperDetails(Admin admin) {
+        AdminBasicInformation adminBasicInformation = modelMapper.map(admin, AdminBasicInformation.class);
+        return adminBasicInformation;
     }
 }

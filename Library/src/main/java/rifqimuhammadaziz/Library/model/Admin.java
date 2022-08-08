@@ -37,7 +37,7 @@ public class Admin {
     private Collection<Role> roles;
 
     public String getFullName() {
-        return firstName + lastName;
+        return firstName + " " + lastName;
     }
 
 }
