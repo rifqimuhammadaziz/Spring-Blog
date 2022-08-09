@@ -13,4 +13,7 @@ public interface PostService {
     Post update(PostDto postDto);
     void deleteById(Long id);
     void publishById(Long id);
+
+    /* BLOG */
+    List<Post> getRelatedPost(Long categoryId);
 }

@@ -82,6 +82,11 @@ public class PostServiceImpl implements PostService {
         postRepository.save(post);
     }
 
+    @Override
+    public List<Post> getRelatedPost(Long categoryId) {
+        return postRepository.getRelatedPost(categoryId);
+    }
+
     private PostDto mapperDto(Post post) {
         PostDto postDto = modelMapper.map(post, PostDto.class);
         return postDto;
