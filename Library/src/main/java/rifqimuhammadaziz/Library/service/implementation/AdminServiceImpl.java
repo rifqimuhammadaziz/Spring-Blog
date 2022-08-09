@@ -13,6 +13,7 @@ import rifqimuhammadaziz.Library.service.contract.AdminService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -72,9 +73,25 @@ public class AdminServiceImpl implements AdminService {
             admin.setLastName(adminDto.getLastName());
             admin.setUsername(adminDto.getUsername());
             admin.setPassword(adminDto.getPassword());
+            admin.setActivated(false);
+            admin.setCreatedDate(new Date());
             admin.setRoles(Arrays.asList(roleRepository.findByName("ADMIN")));
         }
         return adminRepository.save(admin);
+    }
+
+    @Override
+    public void enableById(Long id) {
+        Admin admin = adminRepository.findById(id).get();
+        admin.setActivated(true);
+        adminRepository.save(admin);
+    }
+
+    @Override
+    public void disableById(Long id) {
+        Admin admin = adminRepository.findById(id).get();
+        admin.setActivated(false);
+        adminRepository.save(admin);
     }
 
     public Admin mapperEntity(AdminBasicInformation adminBasicInformation) {

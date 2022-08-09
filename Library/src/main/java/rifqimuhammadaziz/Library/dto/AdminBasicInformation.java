@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import rifqimuhammadaziz.Library.model.Role;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -17,8 +18,10 @@ public class AdminBasicInformation {
     private String lastName;
     private String username;
     private Set<Role> roles;
+    private Date createdDate;
+    private boolean activated;
 
-    public String fullName() {
+    public String getFullName() {
         return firstName + " " + lastName;
     }
 }

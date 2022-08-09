@@ -9,8 +9,9 @@ import java.util.List;
 public interface AdminService {
 //    Admin findByEmail(String email);
     List<AdminBasicInformation> findAll();
-    List<Admin> findAllAdmin();
     Admin findByUsername(String username);
     AdminBasicInformation getLoginDetails(String username);
     Admin save(AdminDto adminDto);
+    void enableById(Long id);
+    void disableById(Long id);
 }

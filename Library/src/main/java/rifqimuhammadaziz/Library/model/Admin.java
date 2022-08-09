@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -19,10 +20,22 @@ public class Admin {
     @Column(name = "admin_id")
     private Long id;
 
+    @Column(nullable = false)
     private String firstName;
+
+    @Column(nullable = false)
     private String lastName;
+
+    @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private Date createdDate;
+
+    private boolean activated;
 
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB")
@@ -39,5 +52,4 @@ public class Admin {
     public String getFullName() {
         return firstName + " " + lastName;
     }
-
 }

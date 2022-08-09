@@ -9,18 +9,11 @@
 		<div class="page-wrapper">
 			<div class="page-content">
 
-				<nav class="page-breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Tables</a></li>
-						<li aria-current="page" class="breadcrumb-item active">Data Table</li>
-					</ol>
-				</nav>
-
 				<div class="row">
 					<div class="col-md-12 grid-margin stretch-card">
 						<div class="card">
 							<div class="card-body">
-								<h6 class="card-title">All Posts</h6>
+								<h6 class="card-title">All Admins</h6>
 								<p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank">
 									Official DataTables Documentation </a>for a full list of instructions and other
 									options.
@@ -44,11 +37,10 @@
 											<td th:text="${admin.getFullName()}"></td>
 											<td th:text="${admin.username}"></td>
 											<td th:text="${admin.roles}"></td>
-											<td th:text="${admin.firstName}"></td>
+											<td th:text="${#dates.format(admin.createdDate, 'dd-MM-yyyy HH:mm')}"></td>
 											<td>
-												<span class="badge bg-success">Active</span>
-												<span class="badge bg-warning">Waiting Confirmation</span>
-												<span class="badge bg-danger">Disabled</span>
+												<span class="badge bg-success" th:if="${admin.activated == true}">Active</span>
+												<span class="badge bg-danger" th:if="${admin.activated == false}">Inactive</span>
 											</td>
 											<td>
 												<a class="btn btn-warning btn-icon"
@@ -59,14 +51,13 @@
 												   type="button">
 													<i data-feather="edit"></i>
 												</a>
-
 												<a class="btn btn-success btn-icon"
-												   type="button">
-													<i data-feather="check-square"></i>
+												   type="button" th:if="${admin.activated == false}" th:href="@{/users/enable/(id = ${admin.id})}">
+													<i data-feather="unlock"></i>
 												</a>
 												<a class="btn btn-danger btn-icon"
-												   type="button">
-													<i data-feather="trash"></i>
+												   type="button" th:if="${admin.activated == true}" th:href="@{/users/disable/(id = ${admin.id})}">
+													<i data-feather="lock"></i>
 												</a>
 											</td>
 										</tr>

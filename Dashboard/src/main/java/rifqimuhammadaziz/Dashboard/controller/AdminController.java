@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import rifqimuhammadaziz.Library.dto.AdminBasicInformation;
 import rifqimuhammadaziz.Library.model.Admin;
 import rifqimuhammadaziz.Library.service.contract.AdminService;
@@ -26,12 +29,36 @@ public class AdminController {
             model.addAttribute("admin", admin);
 
             // Find All Admins
-            List<Admin> admins = adminService.findAllAdmin();
+            List<AdminBasicInformation> admins = adminService.findAll();
             model.addAttribute("admins", admins);
         } else {
             session.removeAttribute("username");
             return "redirect:/login";
         }
         return "users/users";
+    }
+
+    @RequestMapping(value = "/users/enable", method = {RequestMethod.PUT, RequestMethod.GET})
+    public String enable(Long id, RedirectAttributes attributes) {
+        try {
+            adminService.enableById(id);
+            attributes.addFlashAttribute("enableSuccess", "User Successfully Enabled.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            attributes.addFlashAttribute("enableFailed", "Failed to Enable User.");
+        }
+        return "redirect:/users";
+    }
+
+    @RequestMapping(value = "/users/disable", method = {RequestMethod.PUT, RequestMethod.GET})
+    public String disable(Long id, RedirectAttributes attributes) {
+        try {
+            adminService.disableById(id);
+            attributes.addFlashAttribute("disableSuccess", "User Successfully Disabled.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            attributes.addFlashAttribute("enableFailed", "Failed to Disable User.");
+        }
+        return "redirect:/users";
     }
 }
