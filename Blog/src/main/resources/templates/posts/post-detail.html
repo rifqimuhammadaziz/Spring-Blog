@@ -23,8 +23,11 @@
 							<div class="card-body">
 								<p>[(${post.content})]</p>
 							</div>
-							<div class="card-footer">
-								Author Name
+							<div class="card-footer justify-content-end">
+								<div class="d-flex justify-content-between align-items-baseline">
+									<p>[[${post.author}]]</p>
+									<p>[[${#dates.format(post.createdDate, 'd MMMM yyyy')}]]</p>
+								</div>
 							</div>
 						</div>
 					</div>
