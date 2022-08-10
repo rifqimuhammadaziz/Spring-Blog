@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -17,6 +18,9 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private String author;
+
     @Column(name = "title", nullable = false)
     private String title;
 
@@ -27,6 +31,7 @@ public class Post {
     @Lob()
     private String content;
 
+    private Date createdDate;
     private boolean isPublished;
     private boolean isDeleted;
 }

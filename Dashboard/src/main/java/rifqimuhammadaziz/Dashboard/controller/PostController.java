@@ -68,9 +68,9 @@ public class PostController {
     }
 
     @PostMapping("/save-post")
-    public String savePost(@ModelAttribute("post") PostDto postDto, RedirectAttributes attributes) {
+    public String savePost(@ModelAttribute("post") PostDto postDto, RedirectAttributes attributes, Principal principal) {
         try {
-            postService.save(postDto);
+            postService.save(postDto, principal);
             attributes.addFlashAttribute("createSuccess", "New post successfully created");
         } catch (Exception e) {
             e.printStackTrace();

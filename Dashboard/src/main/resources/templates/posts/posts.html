@@ -47,9 +47,9 @@
 										<tr th:each="post : ${posts}">
 											<td th:text="${#strings.abbreviate(post.title, 70)}"></td>
 											<td th:text="${post.postCategory.name}"></td>
-											<td>On Progress</td>
+											<td th:text="${post.author}"></td>
 											<td th:utext="${#strings.abbreviate(post.content,50)}"></td>
-											<td>2 Mei 1999</td>
+											<td th:text="${#dates.format(post.createdDate, 'd MMMM yyyy HH:mm')}"></td>
 											<td>
                                                 <span class="badge bg-success" th:if="${post.isPublished == true}">Published</span>
                                                 <span class="badge bg-warning" th:if="${post.isPublished == false} and ${post.isDeleted == false}">On Review</span>

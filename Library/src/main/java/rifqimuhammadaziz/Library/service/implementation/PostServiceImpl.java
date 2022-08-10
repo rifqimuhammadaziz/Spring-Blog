@@ -4,10 +4,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rifqimuhammadaziz.Library.dto.PostDto;
+import rifqimuhammadaziz.Library.model.Admin;
 import rifqimuhammadaziz.Library.model.Post;
+import rifqimuhammadaziz.Library.repository.AdminRepository;
 import rifqimuhammadaziz.Library.repository.PostRepository;
 import rifqimuhammadaziz.Library.service.contract.PostService;
 
+import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +20,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private AdminRepository adminRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -36,12 +43,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post save(PostDto postDto) {
+    public Post save(PostDto postDto, Principal principal) {
         try {
-            Post post = new Post();
-            post.setTitle(postDto.getTitle());
-            post.setPostCategory(postDto.getPostCategory());
-            post.setContent(postDto.getContent());
+            Post post = mapperEntity(postDto);
+            Admin admin = adminRepository.findByUsername(principal.getName());
+            post.setAuthor(admin.getFullName());
+            post.setCreatedDate(new Date());
             post.setDeleted(false);
             post.setPublished(false);
             System.out.println(post);
