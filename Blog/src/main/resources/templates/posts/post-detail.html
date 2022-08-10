@@ -34,70 +34,18 @@
 								<div class="d-flex justify-content-between align-items-baseline mb-4">
 									<h6 class="card-title mb-0">Related Post</h6>
 								</div>
-								<div class="d-flex flex-column">
-									<a class="d-flex align-items-center border-bottom pb-3" href="javascript:;">
+								<div class="d-flex flex-column mb-3" th:each="relatedPost : ${posts}" th:if="${relatedPost.id != post.id}">
+									<a class="d-flex align-items-center border-bottom pb-3" th:href="@{/post/{id} (id = ${relatedPost.id})}">
 										<div class="me-3">
 											<img alt="user" class="rounded-circle wd-35"
 											     src="https://via.placeholder.com/35x35">
 										</div>
 										<div class="w-100">
 											<div class="d-flex justify-content-between">
-												<h6 class="text-body mb-2">Post Title</h6>
-												<p class="text-muted tx-12">Created Date</p>
+												<h6 class="text-body mb-2">[[${relatedPost.title}]]</h6>
+												<p class="text-muted tx-12">[[${relatedPost.id}]]</p>
 											</div>
-											<p class="text-muted tx-13">Post Content</p>
-										</div>
-									</a>
-									<a class="d-flex align-items-center border-bottom py-3" href="javascript:;">
-										<div class="me-3">
-											<img alt="user" class="rounded-circle wd-35"
-											     src="https://via.placeholder.com/35x35">
-										</div>
-										<div class="w-100">
-											<div class="d-flex justify-content-between">
-												<h6 class="text-body mb-2">Carl Henson</h6>
-												<p class="text-muted tx-12">02.14 AM</p>
-											</div>
-											<p class="text-muted tx-13">I've finished it! See you so..</p>
-										</div>
-									</a>
-									<a class="d-flex align-items-center border-bottom py-3" href="javascript:;">
-										<div class="me-3">
-											<img alt="user" class="rounded-circle wd-35"
-											     src="https://via.placeholder.com/35x35">
-										</div>
-										<div class="w-100">
-											<div class="d-flex justify-content-between">
-												<h6 class="text-body mb-2">Jensen Combs</h6>
-												<p class="text-muted tx-12">08.22 PM</p>
-											</div>
-											<p class="text-muted tx-13">This template is awesome!</p>
-										</div>
-									</a>
-									<a class="d-flex align-items-center border-bottom py-3" href="javascript:;">
-										<div class="me-3">
-											<img alt="user" class="rounded-circle wd-35"
-											     src="https://via.placeholder.com/35x35">
-										</div>
-										<div class="w-100">
-											<div class="d-flex justify-content-between">
-												<h6 class="text-body mb-2">Amiah Burton</h6>
-												<p class="text-muted tx-12">05.49 AM</p>
-											</div>
-											<p class="text-muted tx-13">Nice to meet you</p>
-										</div>
-									</a>
-									<a class="d-flex align-items-center border-bottom py-3" href="javascript:;">
-										<div class="me-3">
-											<img alt="user" class="rounded-circle wd-35"
-											     src="https://via.placeholder.com/35x35">
-										</div>
-										<div class="w-100">
-											<div class="d-flex justify-content-between">
-												<h6 class="text-body mb-2">Yaretzi Mayo</h6>
-												<p class="text-muted tx-12">01.19 AM</p>
-											</div>
-											<p class="text-muted tx-13">Hey! there I'm available...</p>
+											<p class="text-muted tx-13" th:utext="${#strings.abbreviate(relatedPost.content,50)}"></p>
 										</div>
 									</a>
 								</div>
