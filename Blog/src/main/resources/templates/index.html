@@ -65,7 +65,9 @@
                                         <h6 class="card-title">[[${post.title}]]</h6>
                                         <h6 class="card-subtitle mb-2 text-muted">[[${post.postCategory.name}]]</h6>
                                         <p class="card-text mb-3" th:utext="${#strings.abbreviate(post.content,150)}"></p>
-                                        <a class="card-link" href="#">Read More</a>
+                                        <div class="d-flex justify-content-end align-items-baseline pt-2">
+                                            <a class="card-link" href="#">Read More</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

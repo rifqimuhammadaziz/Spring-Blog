@@ -157,11 +157,8 @@
 							</a>
 							<div class="submenu">
 								<ul class="submenu-item">
-									<li class="postCategory-heading">Email</li>
-									<li class="nav-item"><a class="nav-link" href="pages/email/inbox.html">Inbox</a>
-									</li>
-									<li class="nav-item"><a class="nav-link" href="pages/email/read.html">Read</a></li>
-									<li class="nav-item"><a class="nav-link" href="pages/email/compose.html">Compose</a>
+									<li class="nav-item" th:each="postcategory : ${postCategories}">
+										<a class="nav-link" th:href="@{/category}">[[${postcategory.name}]]</a>
 									</li>
 								</ul>
 							</div>
@@ -192,7 +189,7 @@
 							<div class="submenu">
 								<div class="col-group-wrapper row">
 									<div class="col-group col-md-6">
-										<p class="postCategory-heading">Special Pages</p>
+										<p class="category-heading">Special Pages</p>
 										<div class="submenu-item">
 											<div class="row">
 												<div class="col-md-6">
@@ -225,7 +222,7 @@
 										</div>
 									</div>
 									<div class="col-group col-md-3">
-										<p class="postCategory-heading">Auth Pages</p>
+										<p class="category">Auth Pages</p>
 										<ul class="submenu-item">
 											<li class="nav-item"><a class="nav-link"
 											                        href="pages/auth/login.html">Login</a></li>
@@ -234,7 +231,7 @@
 										</ul>
 									</div>
 									<div class="col-group col-md-3">
-										<p class="postCategory-heading">Error Pages</p>
+										<p class="category">Error Pages</p>
 										<ul class="submenu-item">
 											<li class="nav-item"><a class="nav-link" href="pages/error/404.html">404</a>
 											</li>
