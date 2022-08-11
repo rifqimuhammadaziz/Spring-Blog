@@ -90,6 +90,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> getAllPosts() {
+        return postRepository.getAllPosts();
+    }
+
+    @Override
     public List<Post> getRelatedPost(Long categoryId) {
         return postRepository.getRelatedPost(categoryId);
     }

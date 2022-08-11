@@ -26,7 +26,7 @@ public class HomeController {
 
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String home(Model model) {
-        List<PostDto> posts = postService.findAll();
+        List<Post> posts = postService.getAllPosts();
         model.addAttribute("posts", posts);
 
         List<PostCategory> postCategories = postCategoryService.findAll();

@@ -16,5 +16,6 @@ public interface PostService {
     void publishById(Long id);
 
     /* BLOG */
+    List<Post> getAllPosts();
     List<Post> getRelatedPost(Long categoryId);
 }
