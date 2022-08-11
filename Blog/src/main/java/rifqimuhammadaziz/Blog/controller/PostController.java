@@ -28,7 +28,7 @@ public class PostController {
         model.addAttribute("post", postDto);
 
         Long categoryId = postDto.getPostCategory().getId();
-        List<Post> posts = postService.getRelatedPost(categoryId);
+        List<Post> posts = postService.getRelatedPosts(categoryId);
         model.addAttribute("posts", posts);
 
         List<PostCategory> postCategories = postCategoryService.findAll();

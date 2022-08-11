@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments::head">
+</head>
+<body>
+
+	<div class="main-wrapper">
+
+		<div class="horizontal-menu">
+			<nav th:replace="fragments::top-navbar"></nav>
+
+			<nav th:replace="fragments::bottom-navbar"></nav>
+		</div>
+
+		<div class="page-wrapper">
+
+			<div class="page-content">
+
+				<div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+					<div>
+						<h4 class="mb-3 mb-md-0">Category : [[${category.name}]]</h4>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-12 col-xl-12 stretch-card">
+						<div class="row flex-grow-1">
+							<div class="col-md-4 grid-margin stretch-card" th:each="post : ${posts}">
+								<div class="card">
+									<div class="card-body">
+										<h6 class="card-title">[[${post.title}]]</h6>
+										<h6 class="card-subtitle mb-2 text-muted">[[${post.postCategory.name}]]</h6>
+										<p class="card-text mb-3" th:utext="${#strings.abbreviate(post.content,150)}"></p>
+									</div>
+									<div class="card-footer">
+										<div class="d-flex justify-content-end align-items-baseline">
+											<a class="card-link" th:href="@{/post/{id} (id = ${post.id})}">Read More</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col d-flex justify-content-center">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+								<li class="page-item"><a class="page-link" href="#"><i data-feather="chevron-left"></i></a>
+								</li>
+								<li class="page-item active"><a class="page-link" href="#">1</a></li>
+								<li class="page-item disabled"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item"><a class="page-link" href="#"><i data-feather="chevron-right"></i></a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+
+			</div>
+
+			<footer th:replace="fragments::footer"></footer>
+
+		</div>
+	</div>
+
+	<div th:replace="fragments::scripts"></div>
+
+</body>
+</html>
