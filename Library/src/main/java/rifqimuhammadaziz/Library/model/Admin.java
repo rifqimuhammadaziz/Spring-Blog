@@ -1,6 +1,7 @@
 package rifqimuhammadaziz.Library.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.Collection;
 import java.util.Date;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -41,7 +43,7 @@ public class Admin {
     @Column(columnDefinition = "MEDIUMBLOB")
     private String photo;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "admins_roles",
             joinColumns = @JoinColumn(name = "admin_id", referencedColumnName = "admin_id"),

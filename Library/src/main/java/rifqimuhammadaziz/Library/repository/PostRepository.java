@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
 
+    /* DASHBOARD */
+
+
     /* BLOG */
     @Query("SELECT p FROM Post p WHERE p.isPublished = TRUE AND p.isDeleted = FALSE ORDER BY p.createdDate ASC")
     List<Post> getPosts();

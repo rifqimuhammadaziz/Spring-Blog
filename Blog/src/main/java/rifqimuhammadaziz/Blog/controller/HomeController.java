@@ -24,7 +24,7 @@ public class HomeController {
     @Autowired
     private PostCategoryService postCategoryService;
 
-    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/home", "/posts"}, method = RequestMethod.GET)
     public String home(Model model) {
         List<Post> posts = postService.getPosts();
         model.addAttribute("posts", posts);

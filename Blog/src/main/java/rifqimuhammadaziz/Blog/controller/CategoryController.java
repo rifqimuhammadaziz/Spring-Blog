@@ -29,6 +29,9 @@ public class CategoryController {
         List<Post> posts = postService.getPostsByCategory(categoryId);
         model.addAttribute("posts", posts);
 
+        List<PostCategory> postCategories = postCategoryService.findAll();
+        model.addAttribute("postCategories", postCategories);
+
         return "categories/posts";
     }
 }

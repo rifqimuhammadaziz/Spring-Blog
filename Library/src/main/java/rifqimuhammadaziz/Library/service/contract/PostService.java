@@ -1,5 +1,6 @@
 package rifqimuhammadaziz.Library.service.contract;
 
+import org.springframework.data.domain.Page;
 import rifqimuhammadaziz.Library.dto.PostDto;
 import rifqimuhammadaziz.Library.model.Post;
 
@@ -16,6 +17,7 @@ public interface PostService {
     void publishById(Long id);
 
     /* BLOG */
+    Page<Post> pagePosts(int pageNo);
     List<Post> getPosts();
     List<Post> getPostsByCategory(Long categoryId);
     List<Post> getRelatedPosts(Long categoryId);

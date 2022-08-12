@@ -2,6 +2,10 @@ package rifqimuhammadaziz.Library.service.implementation;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rifqimuhammadaziz.Library.dto.PostDto;
 import rifqimuhammadaziz.Library.model.Admin;
@@ -90,6 +94,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Page<Post> pagePosts(int pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 5);
+        List<Post> posts = postRepository.findAll();
+        Page<Post> postPages = toPage(posts, pageable);
+        return postPages;
+    }
+
+    @Override
     public List<Post> getPosts() {
         return postRepository.getPosts();
     }
@@ -102,6 +114,18 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getRelatedPosts(Long categoryId) {
         return postRepository.getRelatedPosts(categoryId);
+    }
+
+    private Page toPage(List<Post> posts, Pageable pageable) {
+        if (pageable.getOffset() >= posts.size()) {
+            return Page.empty();
+        }
+        int startIndex = (int) pageable.getOffset();
+        int endIndex = ((pageable.getOffset() + pageable.getPageSize()) > posts.size())
+                ? posts.size()
+                : (int) (pageable.getOffset() + pageable.getPageSize());
+        List list = posts.subList(startIndex, endIndex);
+        return new PageImpl(list, pageable, posts.size());
     }
 
     private PostDto mapperDto(Post post) {
