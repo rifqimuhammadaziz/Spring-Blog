@@ -1,6 +1,7 @@
 package rifqimuhammadaziz.Blog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import rifqimuhammadaziz.Library.model.PostCategory;
 import rifqimuhammadaziz.Library.service.contract.PostCategoryService;
 import rifqimuhammadaziz.Library.service.contract.PostService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -35,6 +37,17 @@ public class PostController {
         model.addAttribute("postCategories", postCategories);
 
         return "posts/post-detail";
+    }
+
+    @GetMapping("/posts/{pageNo}")
+    public String postsPage(@PathVariable("pageNo") int pageNo, Model model, Principal principal) {
+        Page<Post> posts = postService.pagePosts(pageNo);
+        model.addAttribute("size", posts.getSize());
+        model.addAttribute("totalPages", posts.getTotalPages());
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("posts", posts);
+
+        return "posts/posts";
     }
 
 }
