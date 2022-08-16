@@ -1,5 +1,6 @@
 package rifqimuhammadaziz.Blog.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,12 +17,10 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class PostController {
 
-    @Autowired
     private PostService postService;
-
-    @Autowired
     private PostCategoryService postCategoryService;
 
     @GetMapping("/post/{id}")

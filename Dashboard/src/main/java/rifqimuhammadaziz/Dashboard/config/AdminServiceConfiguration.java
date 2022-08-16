@@ -29,5 +29,6 @@ public class AdminServiceConfiguration implements UserDetailsService {
                         .stream()
                         .map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList())
         );
+//        boolean enabled = admin.isActivated();
     }
 }

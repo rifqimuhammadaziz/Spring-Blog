@@ -1,5 +1,6 @@
 package rifqimuhammadaziz.Library.service.implementation;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,15 +21,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class PostServiceImpl implements PostService {
 
-    @Autowired
     private PostRepository postRepository;
-
-    @Autowired
     private AdminRepository adminRepository;
-
-    @Autowired
     private ModelMapper modelMapper;
 
     @Override

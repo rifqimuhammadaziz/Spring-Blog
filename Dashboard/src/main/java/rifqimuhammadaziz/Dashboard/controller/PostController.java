@@ -1,5 +1,6 @@
 package rifqimuhammadaziz.Dashboard.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +18,11 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class PostController {
 
-    @Autowired
     private AdminService adminService;
-
-    @Autowired
     private PostService postService;
-
-    @Autowired
     private PostCategoryService postCategoryService;
 
     @GetMapping("/posts")

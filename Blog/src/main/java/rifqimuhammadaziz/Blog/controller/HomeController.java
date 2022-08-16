@@ -1,5 +1,6 @@
 package rifqimuhammadaziz.Blog.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +17,10 @@ import rifqimuhammadaziz.Library.service.contract.PostService;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class HomeController {
 
-    @Autowired
     private PostService postService;
-
-    @Autowired
     private PostCategoryService postCategoryService;
 
     @RequestMapping(value = {"/", "/home", "/posts"}, method = RequestMethod.GET)

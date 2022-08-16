@@ -1,5 +1,6 @@
 package rifqimuhammadaziz.Dashboard.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -14,9 +15,9 @@ import rifqimuhammadaziz.Library.service.contract.InformationCategoryService;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class InformationCategoryController {
 
-    @Autowired
     private InformationCategoryService categoryService;
 
     @GetMapping("/informations/categories")

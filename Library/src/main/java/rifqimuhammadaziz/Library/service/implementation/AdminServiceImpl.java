@@ -1,5 +1,6 @@
 package rifqimuhammadaziz.Library.service.implementation;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,15 +18,11 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class AdminServiceImpl implements AdminService {
 
-    @Autowired
     private AdminRepository adminRepository;
-
-    @Autowired
     private RoleRepository roleRepository;
-
-    @Autowired
     private ModelMapper modelMapper;
 
 //    @Override

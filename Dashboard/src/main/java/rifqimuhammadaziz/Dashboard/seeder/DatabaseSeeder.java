@@ -1,5 +1,6 @@
 package rifqimuhammadaziz.Dashboard.seeder;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,21 +19,13 @@ import java.util.Date;
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class DatabaseSeeder implements CommandLineRunner {
 
-    @Autowired
     private AdminRepository adminRepository;
-
-    @Autowired
     private RoleRepository roleRepository;
-
-    @Autowired
     private PostCategoryRepository postCategoryRepository;
-
-    @Autowired
     private PostRepository postRepository;
-
-    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override

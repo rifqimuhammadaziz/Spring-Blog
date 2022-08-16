@@ -1,5 +1,6 @@
 package rifqimuhammadaziz.Library.service.implementation;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rifqimuhammadaziz.Library.model.InformationCategory;
@@ -9,9 +10,9 @@ import rifqimuhammadaziz.Library.service.contract.InformationCategoryService;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class InformationCategoryServiceImpl implements InformationCategoryService {
 
-    @Autowired
     private InformationCategoryRepository categoryRepository;
 
     @Override

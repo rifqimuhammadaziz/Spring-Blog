@@ -1,5 +1,6 @@
 package rifqimuhammadaziz.Dashboard.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -16,12 +17,10 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class PostCategoryController {
 
-    @Autowired
     private AdminService adminService;
-
-    @Autowired
     private PostCategoryService postCategoryService;
 
     @GetMapping("/posts/categories")

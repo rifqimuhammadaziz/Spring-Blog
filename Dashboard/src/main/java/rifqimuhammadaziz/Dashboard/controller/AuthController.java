@@ -1,5 +1,6 @@
 package rifqimuhammadaziz.Dashboard.controller;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,13 +21,11 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
+@AllArgsConstructor
 @Slf4j
 public class AuthController {
 
-    @Autowired
     private AdminService adminService;
-
-    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
