@@ -2,7 +2,6 @@ package rifqimuhammadaziz.Library.service.implementation;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rifqimuhammadaziz.Library.dto.AdminDto;
 import rifqimuhammadaziz.Library.dto.AdminBasicInformation;
@@ -22,13 +21,6 @@ public class AdminServiceImpl implements AdminService {
     private AdminRepository adminRepository;
     private RoleRepository roleRepository;
     private ModelMapper modelMapper;
-
-//    @Override
-//    public Admin findByEmail(String email) {
-//        Admin admin = adminRepository.findByEmail(email);
-//        System.out.println(admin);
-//        return admin;
-//    }
 
     @Override
     public List<AdminBasicInformation> findAllAdminBasicInformation() {

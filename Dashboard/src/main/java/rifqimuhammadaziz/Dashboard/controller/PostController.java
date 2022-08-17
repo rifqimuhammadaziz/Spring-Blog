@@ -128,7 +128,6 @@ public class PostController {
             // Get Login Details
             AdminBasicInformation admin = adminService.getLoginDetails(principal.getName());
             model.addAttribute("admin", admin);
-            System.out.println(admin);
             session.setAttribute("username", principal.getName());
 
             // Find Post By ID

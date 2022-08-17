@@ -6,15 +6,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import rifqimuhammadaziz.Library.exception.NotFoundException;
-import rifqimuhammadaziz.Library.model.Admin;
-import rifqimuhammadaziz.Library.model.Post;
-import rifqimuhammadaziz.Library.model.PostCategory;
-import rifqimuhammadaziz.Library.model.Role;
-import rifqimuhammadaziz.Library.repository.AdminRepository;
-import rifqimuhammadaziz.Library.repository.PostCategoryRepository;
-import rifqimuhammadaziz.Library.repository.PostRepository;
-import rifqimuhammadaziz.Library.repository.RoleRepository;
+import rifqimuhammadaziz.Library.model.*;
+import rifqimuhammadaziz.Library.repository.*;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +22,8 @@ public class DatabaseSeeder implements CommandLineRunner {
     private RoleRepository roleRepository;
     private PostCategoryRepository postCategoryRepository;
     private PostRepository postRepository;
+    private InformationCategoryRepository informationCategoryRepository;
+    private InformationRepository informationRepository;
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
@@ -35,6 +32,8 @@ public class DatabaseSeeder implements CommandLineRunner {
         adminSeeder();
         postCategorySeeder();
         postSeeder();
+        informationCategorySeeder();
+        informationSeeder();
     }
 
     private void adminSeeder() {
@@ -115,6 +114,47 @@ public class DatabaseSeeder implements CommandLineRunner {
 
             List<Post> posts = Arrays.asList(post1, post2);
             postRepository.saveAll(posts);
+        }
+        System.out.println("Total Posts: " + postRepository.count());
+    }
+
+    private void informationCategorySeeder() {
+        if (informationCategoryRepository.count() == 0) {
+            InformationCategory category1 = new InformationCategory("News");
+            InformationCategory category2 = new InformationCategory("People");
+            InformationCategory category3 = new InformationCategory("Academic");
+            List<InformationCategory> categories = Arrays.asList(category1, category2, category3);
+            informationCategoryRepository.saveAll(categories);
+        }
+        System.out.println("Total Information Categories: " + informationCategoryRepository.count());
+    }
+
+    private void informationSeeder() {
+        Admin admin = adminRepository.findByUsername("rifqi@gmail.com").orElseThrow(() -> new NotFoundException("Not found"));
+        InformationCategory category = informationCategoryRepository.findById(1L).get();
+        if (informationRepository.count() == 0) {
+            Information information1 = new Information();
+            information1.setAuthor(admin.getFullName());
+            information1.setTitle("Sofware Development Life Cycle (SDLC) Menggunakan Metode Waterfall");
+            information1.setInformationCategory(category);
+            information1.setContent("Metode Waterfall merupakan pendekatan SDLC paling awal yang digunakan untuk pengembangan " +
+                    "perangkat lunak. Urutan dalam Metode Waterfall bersifat serial yang dimulai dari proses perencanaan, " +
+                    "analisa, desain, dan implementasi pada sistem.");
+            information1.setCreatedDate(LocalDateTime.now());
+            information1.setDeleted(false);
+
+            Information information2 = new Information();
+            information2.setAuthor(admin.getFullName());
+            information2.setTitle("Sofware Development Life Cycle (SDLC) Menggunakan Metode Prototype");
+            information2.setInformationCategory(category);
+            information2.setContent("Metode prototype adalah metode yang memungkinkan pengguna atau user memiliki gambaran awal " +
+                    "tentang perangkat lunak yang akan dikembangkan, serta pengguna dapat melakukan pengujian di awal sebelum " +
+                    "perangkat lunak dirilis.");
+            information2.setCreatedDate(LocalDateTime.now());
+            information2.setDeleted(false);
+
+            List<Information> information = Arrays.asList(information1, information2);
+            informationRepository.saveAll(information);
         }
         System.out.println("Total Posts: " + postRepository.count());
     }
