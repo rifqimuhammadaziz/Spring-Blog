@@ -47,7 +47,7 @@ public class PostServiceImpl implements PostService {
     public Post save(PostDto postDto, Principal principal) {
         try {
             Post post = mapperEntity(postDto);
-            Admin admin = adminRepository.findByUsername(principal.getName());
+            Admin admin = adminRepository.findByUsername(principal.getName()).orElseThrow();
             post.setAuthor(admin.getFullName());
             post.setCreatedDate(new Date());
             post.setDeleted(false);

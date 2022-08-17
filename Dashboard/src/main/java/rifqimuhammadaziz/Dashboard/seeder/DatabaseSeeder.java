@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import rifqimuhammadaziz.Library.exception.NotFoundException;
 import rifqimuhammadaziz.Library.model.Admin;
 import rifqimuhammadaziz.Library.model.Post;
 import rifqimuhammadaziz.Library.model.PostCategory;
@@ -87,7 +88,7 @@ public class DatabaseSeeder implements CommandLineRunner {
     }
 
     private void postSeeder() {
-        Admin admin = adminRepository.findByUsername("rifqi@gmail.com");
+        Admin admin = adminRepository.findByUsername("rifqi@gmail.com").orElseThrow(() -> new NotFoundException("Not found"));
         PostCategory category = postCategoryRepository.findById(1L).get();
         if (postRepository.count() == 0) {
             Post post1 = new Post();

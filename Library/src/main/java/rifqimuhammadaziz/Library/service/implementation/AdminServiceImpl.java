@@ -6,16 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rifqimuhammadaziz.Library.dto.AdminDto;
 import rifqimuhammadaziz.Library.dto.AdminBasicInformation;
+import rifqimuhammadaziz.Library.exception.NotFoundException;
 import rifqimuhammadaziz.Library.model.Admin;
 import rifqimuhammadaziz.Library.model.Role;
 import rifqimuhammadaziz.Library.repository.AdminRepository;
 import rifqimuhammadaziz.Library.repository.RoleRepository;
 import rifqimuhammadaziz.Library.service.contract.AdminService;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -33,7 +31,7 @@ public class AdminServiceImpl implements AdminService {
 //    }
 
     @Override
-    public List<AdminBasicInformation> findAll() {
+    public List<AdminBasicInformation> findAllAdminBasicInformation() {
         List<AdminBasicInformation> admins = new ArrayList<>();
         for (Admin admin : adminRepository.findAll()) {
             AdminBasicInformation details = mapperDetails(admin);
@@ -42,19 +40,27 @@ public class AdminServiceImpl implements AdminService {
         return admins;
     }
 
+    @Override
     public List<Admin> findAllAdmin() {
         return adminRepository.findAll();
     }
 
+    public Admin findById(Long id) {
+        return adminRepository.findById(id).orElseThrow(() -> new NotFoundException("Not Found"));
+    }
+
     @Override
     public Admin findByUsername(String username) {
-        return adminRepository.findByUsername(username);
+        return adminRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("Admin with username: " + username + " is not found"));
     }
 
     @Override
     public AdminBasicInformation getLoginDetails(String username) {
         AdminBasicInformation adminBasicInformation = new AdminBasicInformation();
-        Admin admin = adminRepository.findByUsername(username);
+        Admin admin = adminRepository.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("Admin with username: " + username + " is not found"));
+
         adminBasicInformation.setUsername(admin.getUsername());
         adminBasicInformation.setFirstName(admin.getFirstName());
         adminBasicInformation.setLastName(admin.getLastName());
@@ -66,10 +72,7 @@ public class AdminServiceImpl implements AdminService {
         Admin admin = new Admin();
         Role role = roleRepository.findByName("ADMIN");
         if (role != null) {
-            admin.setFirstName(adminDto.getFirstName());
-            admin.setLastName(adminDto.getLastName());
-            admin.setUsername(adminDto.getUsername());
-            admin.setPassword(adminDto.getPassword());
+            admin = mapperEntityFromDto(adminDto);
             admin.setActivated(false);
             admin.setCreatedDate(new Date());
             admin.setRoles(Arrays.asList(roleRepository.findByName("ADMIN")));
@@ -78,17 +81,22 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void enableById(Long id) {
+    public void enableAdminById(Long id) {
         Admin admin = adminRepository.findById(id).get();
         admin.setActivated(true);
         adminRepository.save(admin);
     }
 
     @Override
-    public void disableById(Long id) {
+    public void disableAdminById(Long id) {
         Admin admin = adminRepository.findById(id).get();
         admin.setActivated(false);
         adminRepository.save(admin);
+    }
+
+    public Admin mapperEntityFromDto(AdminDto adminDto) {
+        Admin admin = modelMapper.map(adminDto, Admin.class);
+        return admin;
     }
 
     public Admin mapperEntity(AdminBasicInformation adminBasicInformation) {

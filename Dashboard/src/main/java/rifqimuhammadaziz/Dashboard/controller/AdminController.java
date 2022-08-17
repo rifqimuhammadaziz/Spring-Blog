@@ -30,7 +30,7 @@ public class AdminController {
             model.addAttribute("admin", admin);
 
             // Find All Admins
-            List<AdminBasicInformation> admins = adminService.findAll();
+            List<AdminBasicInformation> admins = adminService.findAllAdminBasicInformation();
             model.addAttribute("admins", admins);
         } else {
             session.removeAttribute("username");
@@ -42,7 +42,7 @@ public class AdminController {
     @RequestMapping(value = "/users/enable", method = {RequestMethod.PUT, RequestMethod.GET})
     public String enable(Long id, RedirectAttributes attributes) {
         try {
-            adminService.enableById(id);
+            adminService.enableAdminById(id);
             attributes.addFlashAttribute("enableSuccess", "User Successfully Enabled.");
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,7 +54,7 @@ public class AdminController {
     @RequestMapping(value = "/users/disable", method = {RequestMethod.PUT, RequestMethod.GET})
     public String disable(Long id, RedirectAttributes attributes) {
         try {
-            adminService.disableById(id);
+            adminService.disableAdminById(id);
             attributes.addFlashAttribute("disableSuccess", "User Successfully Disabled.");
         } catch (Exception e) {
             e.printStackTrace();
