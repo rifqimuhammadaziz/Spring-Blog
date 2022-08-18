@@ -3,6 +3,10 @@ package rifqimuhammadaziz.Library.service.implementation;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rifqimuhammadaziz.Library.dto.InformationDto;
 import rifqimuhammadaziz.Library.model.Information;
@@ -63,6 +67,45 @@ public class InformationServiceImpl implements InformationService {
     @Override
     public void deleteById(Long id) {
 
+    }
+
+    /*
+    BLOG
+     */
+
+    @Override
+    public Page<Information> pageAllInformation(int pageNo) {
+        Pageable pageable = PageRequest.of(pageNo, 5);
+        List<Information> information = informationRepository.findAll();
+        Page<Information> informationPages = toPage(information, pageable);
+        return informationPages;
+    }
+
+    @Override
+    public List<Information> getAllInformation() {
+        return informationRepository.getAllInformation();
+    }
+
+    @Override
+    public List<Information> getAllInformationByCategory(Long categoryId) {
+        return informationRepository.getAllInformationByCategory(categoryId);
+    }
+
+    @Override
+    public List<Information> getRelatedAllInformation(Long categoryId) {
+        return informationRepository.getRelatedAllInformation(categoryId);
+    }
+
+    private Page toPage(List<Information> information, Pageable pageable) {
+        if (pageable.getOffset() >= information.size()) {
+            return Page.empty();
+        }
+        int startIndex = (int) pageable.getOffset();
+        int endIndex = ((pageable.getOffset() + pageable.getPageSize()) > information.size())
+                ? information.size()
+                : (int) (pageable.getOffset() + pageable.getPageSize());
+        List list = information.subList(startIndex, endIndex);
+        return new PageImpl(list, pageable, information.size());
     }
 
     private InformationDto mapperDto(Information information) {

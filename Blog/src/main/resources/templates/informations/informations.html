@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments::head">
+</head>
+<body>
+
+	<div class="main-wrapper">
+
+		<div class="horizontal-menu">
+			<nav th:replace="fragments::top-navbar"></nav>
+			<nav th:replace="fragments::bottom-navbar"></nav>
+		</div>
+
+		<div class="page-wrapper">
+
+			<div class="page-content">
+
+				<div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+					<div>
+						<h4 class="mb-3 mb-md-0">Recently All Information</h4>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-12 col-xl-12 stretch-card">
+						<div class="row flex-grow-1">
+							<div class="col-md-4 grid-margin stretch-card" th:each="information : ${informations}">
+								<div class="card">
+									<div class="card-body">
+										<h6 class="card-title">[[${information.title}]]</h6>
+										<h6 class="card-subtitle mb-2 text-muted">[[${information.informationCategory.name}]]</h6>
+										<p class="card-text mb-3"
+										   th:utext="${#strings.abbreviate(information.content,150)}"></p>
+									</div>
+									<div class="card-footer">
+										<div class="d-flex justify-content-end align-items-baseline">
+											<a class="card-link" th:href="@{/information/{id} (id = ${information.id})}">Read More</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col d-flex justify-content-center">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+								<li class="page-item" th:if="${currentPage != 0}">
+									<a class="page-link" th:href="@{'/posts/' + ${currentPage - 1}}">
+										<i data-feather="chevron-left"></i>
+									</a>
+								</li>
+								<li th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage == i - 1 ? 'active' : ''}" class="page-item">
+									<a th:href="@{'/posts/' + ${i - 1}}" class="page-link"><span th:text="${i}"></span></a>
+								</li>
+								<li class="page-item" th:if="${currentPage + 1 != totalPages}">
+									<a class="page-link" th:href="@{'/posts/' + ${currentPage + 1}}">
+										<i data-feather="chevron-right"></i>
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+
+			</div>
+
+			<footer th:replace="fragments::footer"></footer>
+
+		</div>
+	</div>
+
+	<div th:replace="fragments::scripts"></div>
+
+</body>
+</html>
