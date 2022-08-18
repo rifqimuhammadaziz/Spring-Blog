@@ -25,13 +25,16 @@ public class PostController {
 
     @GetMapping("/post/{id}")
     public String post(@PathVariable("id") Long id, Model model) {
+        // Get Post By ID
         PostDto postDto = postService.findById(id);
         model.addAttribute("post", postDto);
 
+        // Get Related Posts
         Long categoryId = postDto.getPostCategory().getId();
         List<Post> posts = postService.getRelatedPosts(categoryId);
         model.addAttribute("posts", posts);
 
+        // Get Information Categories
         List<PostCategory> postCategories = postCategoryService.findAll();
         model.addAttribute("postCategories", postCategories);
 

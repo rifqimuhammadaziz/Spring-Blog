@@ -16,6 +16,7 @@ import rifqimuhammadaziz.Library.repository.PostRepository;
 import rifqimuhammadaziz.Library.service.contract.PostService;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,7 +50,7 @@ public class PostServiceImpl implements PostService {
             Post post = mapperEntity(postDto);
             Admin admin = adminRepository.findByUsername(principal.getName()).orElseThrow();
             post.setAuthor(admin.getFullName());
-            post.setCreatedDate(new Date());
+            post.setCreatedDate(LocalDateTime.now());
             post.setDeleted(false);
             post.setPublished(false);
             System.out.println(post);

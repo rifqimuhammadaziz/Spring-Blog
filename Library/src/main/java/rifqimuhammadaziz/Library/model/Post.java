@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -31,7 +31,7 @@ public class Post {
     @Lob()
     private String content;
 
-    private Date createdDate;
+    private LocalDateTime createdDate;
     private boolean isPublished;
     private boolean isDeleted;
 }
