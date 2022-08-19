@@ -9,10 +9,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import rifqimuhammadaziz.Library.dto.InformationDto;
+import rifqimuhammadaziz.Library.model.Admin;
 import rifqimuhammadaziz.Library.model.Information;
+import rifqimuhammadaziz.Library.repository.AdminRepository;
 import rifqimuhammadaziz.Library.repository.InformationRepository;
 import rifqimuhammadaziz.Library.service.contract.InformationService;
 
+import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +24,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class InformationServiceImpl implements InformationService {
 
+    private AdminRepository adminRepository;
     private InformationRepository informationRepository;
     private ModelMapper modelMapper;
 
@@ -39,9 +44,13 @@ public class InformationServiceImpl implements InformationService {
     }
 
     @Override
-    public Information save(InformationDto informationDto) {
+    public Information save(InformationDto informationDto, Principal principal) {
         try {
+            Admin admin = adminRepository.findByUsername(principal.getName()).orElseThrow();
             Information information = mapperEntity(informationDto);
+            information.setAuthor(admin.getFullName());
+            information.setCreatedDate(LocalDateTime.now());
+            information.setDeleted(false);
             System.out.println(information);
             return informationRepository.save(information);
         } catch (Exception e) {
@@ -84,6 +93,11 @@ public class InformationServiceImpl implements InformationService {
     @Override
     public List<Information> getAllInformation() {
         return informationRepository.getAllInformation();
+    }
+
+    @Override
+    public List<Information> getRecentlyInformation() {
+        return informationRepository.getRecentlyInformation();
     }
 
     @Override

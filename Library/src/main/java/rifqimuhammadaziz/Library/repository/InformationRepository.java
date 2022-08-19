@@ -14,6 +14,9 @@ public interface InformationRepository extends JpaRepository<Information, Long> 
     @Query("SELECT i FROM Information i WHERE i.isDeleted = FALSE ORDER BY i.createdDate ASC")
     List<Information> getAllInformation();
 
+    @Query(value = "SELECT * FROM informations i WHERE i.is_deleted = FALSE ORDER BY i.created_date DESC LIMIT 5", nativeQuery = true)
+    List<Information> getRecentlyInformation();
+
     @Query(
             value = "SELECT * FROM informations i " +
                     "INNER JOIN infocategories c " +

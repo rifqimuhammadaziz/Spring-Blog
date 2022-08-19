@@ -67,10 +67,12 @@ public class InformationController {
     }
 
     @PostMapping("/informations/save-information")
-    public String saveInformation(@ModelAttribute("information") InformationDto informationDto, RedirectAttributes attributes) {
+    public String saveInformation(@ModelAttribute("information") InformationDto informationDto,
+                                  RedirectAttributes attributes,
+                                  Principal principal) {
         try {
-            informationService.save(informationDto);
-            attributes.addFlashAttribute("createSuccess", "New information successully created");
+            informationService.save(informationDto, principal);
+            attributes.addFlashAttribute("createSuccess", "New information successfully created");
         } catch (Exception e) {
             e.printStackTrace();
             attributes.addFlashAttribute("error", "Failed to create new information");

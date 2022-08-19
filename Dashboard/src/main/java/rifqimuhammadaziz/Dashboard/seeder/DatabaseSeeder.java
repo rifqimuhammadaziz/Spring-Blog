@@ -97,7 +97,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             post1.setContent("Metode Waterfall merupakan pendekatan SDLC paling awal yang digunakan untuk pengembangan " +
                     "perangkat lunak. Urutan dalam Metode Waterfall bersifat serial yang dimulai dari proses perencanaan, " +
                     "analisa, desain, dan implementasi pada sistem.");
-            post1.setCreatedDate(new Date());
+            post1.setCreatedDate(LocalDateTime.now());
             post1.setPublished(true);
             post1.setDeleted(false);
 
@@ -108,7 +108,7 @@ public class DatabaseSeeder implements CommandLineRunner {
             post2.setContent("Metode prototype adalah metode yang memungkinkan pengguna atau user memiliki gambaran awal " +
                     "tentang perangkat lunak yang akan dikembangkan, serta pengguna dapat melakukan pengujian di awal sebelum " +
                     "perangkat lunak dirilis.");
-            post2.setCreatedDate(new Date());
+            post2.setCreatedDate(LocalDateTime.now());
             post2.setPublished(true);
             post2.setDeleted(false);
 
