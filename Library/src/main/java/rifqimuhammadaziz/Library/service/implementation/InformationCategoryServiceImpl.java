@@ -33,7 +33,7 @@ public class InformationCategoryServiceImpl implements InformationCategoryServic
 
     @Override
     public InformationCategory findById(Long id) {
-        return null;
+        return categoryRepository.findById(id).get();
     }
 
     @Override

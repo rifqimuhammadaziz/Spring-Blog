@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import rifqimuhammadaziz.Library.dto.InformationDto;
 import rifqimuhammadaziz.Library.model.Information;
 import rifqimuhammadaziz.Library.model.InformationCategory;
+import rifqimuhammadaziz.Library.model.PostCategory;
 import rifqimuhammadaziz.Library.service.contract.InformationCategoryService;
 import rifqimuhammadaziz.Library.service.contract.InformationService;
+import rifqimuhammadaziz.Library.service.contract.PostCategoryService;
 
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class InformationController {
 
     private InformationService informationService;
     private InformationCategoryService informationCategoryService;
+    private PostCategoryService postCategoryService;
 
 //    @GetMapping("/informations")
 //    public String informations(Model model) {
@@ -35,13 +38,22 @@ public class InformationController {
 //    }
 
     @GetMapping("/informations/{pageNo}")
-    public String informationPages(@PathVariable("pageNo") int pageNo,
-                                   Model model) {
+    public String informationPages(@PathVariable("pageNo") int pageNo, Model model) {
+        // Get Information Pages
         Page<Information> informationPage = informationService.pageAllInformation(pageNo);
         model.addAttribute("size", informationPage.getSize());
         model.addAttribute("totalPages", informationPage.getTotalPages());
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("informations", informationPage);
+
+        // Get Post Categories
+        List<PostCategory> postCategories = postCategoryService.findAll();
+        model.addAttribute("postCategories", postCategories);
+
+        // Get Information Categories
+        List<InformationCategory> informationCategories = informationCategoryService.findAll();
+        model.addAttribute("informationCategories", informationCategories);
+
 
         return "informations/informations";
     }
