@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments::head">
+</head>
+<body>
+
+    <div class="main-wrapper">
+
+        <div class="horizontal-menu">
+            <nav th:replace="fragments::top-navbar"></nav>
+
+            <nav th:replace="fragments::bottom-navbar"></nav>
+        </div>
+
+        <div class="page-wrapper">
+
+            <div class="page-content">
+
+                <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+                    <div>
+                        <h4 class="mb-3 mb-md-0">Recently All Posts</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-xl-12 grid-margin stretch-card">
+                        <div class="card overflow-hidden">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-baseline">
+                                    <h6 class="card-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h6>
+                                    <h6 class="card-subtitle text-muted text-end">Post Category</h6>
+                                    <!--                                <p class="card-text mb-3">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                                    <!--                                <a href="#" class="card-link">Read More</a>-->
+                                </div>
+                                <div class="row align-items-start mb-4">
+                                    <div class="col-md-12">
+                                        <p class="text-muted tx-13 mb-3 mb-md-0">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                                            non proident, sunt in culpa qui officia deserunt mollit anim id est
+                                            laborum. </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-between align-items-baseline">
+                                    <p class="tx-12">Rifqi Muhammad Aziz</p>
+                                    <a class="card-link" href="#">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-xl-12 stretch-card">
+                        <div class="row flex-grow-1">
+                            <div class="col-md-4 grid-margin stretch-card" th:each="post : ${posts}">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-title">[[${post.title}]]</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">[[${post.postCategory.name}]]</h6>
+                                        <p class="card-text mb-3" th:utext="${#strings.abbreviate(post.content,150)}"></p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="d-flex justify-content-end align-items-baseline">
+                                            <a class="card-link" th:href="@{/post/{id} (id = ${post.id})}">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-xl-12 grid-margin stretch-card">
+                        <div class="card overflow-hidden">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-baseline">
+                                    <h6 class="card-title">Main Post</h6>
+
+                                    <h6 class="card-subtitle text-muted">Post Category</h6>
+                                    <!--                                <p class="card-text mb-3">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                                    <!--                                <a href="#" class="card-link">Read More</a>-->
+                                </div>
+                                <div class="row align-items-start mb-4">
+                                    <div class="col-md-12">
+                                        <p class="text-muted tx-13 mb-3 mb-md-0">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                                            non proident, sunt in culpa qui officia deserunt mollit anim id est
+                                            laborum. </p>
+                                    </div>
+                                </div>
+                                <div class="row align-items-start">
+                                    <div class="col-md-12">
+                                        <a class="card-link" href="#">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#"><i data-feather="chevron-left"></i></a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item disabled"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#"><i data-feather="chevron-right"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+
+            <footer th:replace="fragments::footer"></footer>
+
+        </div>
+    </div>
+
+    <div th:replace="fragments::scripts"></div>
+
+</body>
+</html>    

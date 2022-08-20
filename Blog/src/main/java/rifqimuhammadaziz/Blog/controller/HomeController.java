@@ -29,11 +29,32 @@ public class HomeController {
     private InformationService informationService;
     private InformationCategoryService informationCategoryService;
 
-    @RequestMapping(value = {"/", "/posts"}, method = RequestMethod.GET)
+//    @RequestMapping(value = {"/", "/posts"}, method = RequestMethod.GET)
+//    public String home(Model model) {
+//        // Get Posts
+//        List<Post> posts = postService.getPosts();
+//        model.addAttribute("posts", posts);
+//
+//        // Get Post Categories
+//        List<PostCategory> postCategories = postCategoryService.findAll();
+//        model.addAttribute("postCategories", postCategories);
+//
+//        // Get Information Categories
+//        List<InformationCategory> informationCategories = informationCategoryService.findAll();
+//        model.addAttribute("informationCategories", informationCategories);
+//
+//        return "index";
+//    }
+
+    @RequestMapping(value = {"/", "/home"})
     public String home(Model model) {
         // Get Posts
         List<Post> posts = postService.getPosts();
         model.addAttribute("posts", posts);
+
+        // Get All Information
+        List<Information> information = informationService.getRecentlyInformation();
+        model.addAttribute("informations", information);
 
         // Get Post Categories
         List<PostCategory> postCategories = postCategoryService.findAll();
@@ -44,19 +65,6 @@ public class HomeController {
         model.addAttribute("informationCategories", informationCategories);
 
         return "index";
-    }
-
-    @RequestMapping("/home")
-    public String home2(Model model) {
-        // Get Posts
-        List<Post> posts = postService.getPosts();
-        model.addAttribute("posts", posts);
-
-        // Get All Information
-        List<Information> information = informationService.getRecentlyInformation();
-        model.addAttribute("informations", information);
-
-        return "home";
     }
 
 }
