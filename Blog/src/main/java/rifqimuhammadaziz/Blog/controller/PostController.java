@@ -37,9 +37,13 @@ public class PostController {
         List<Post> posts = postService.getRelatedPosts(categoryId);
         model.addAttribute("posts", posts);
 
-        // Get Information Categories
+        // Get Post Categories
         List<PostCategory> postCategories = postCategoryService.findAll();
         model.addAttribute("postCategories", postCategories);
+
+        // Get Information Categories
+        List<InformationCategory> informationCategories = informationCategoryService.findAll();
+        model.addAttribute("informationCategories", informationCategories);
 
         return "posts/post-detail";
     }
@@ -60,7 +64,6 @@ public class PostController {
         // Get Information Categories
         List<InformationCategory> informationCategories = informationCategoryService.findAll();
         model.addAttribute("informationCategories", informationCategories);
-
 
         return "posts/posts";
     }
