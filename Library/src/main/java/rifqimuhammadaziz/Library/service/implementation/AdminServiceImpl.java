@@ -42,9 +42,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Admin findByUsername(String username) {
-        return adminRepository.findByUsername(username)
-                .orElseThrow(() -> new NotFoundException("Admin with username: " + username + " is not found"));
+    public Optional<Admin> findByUsername(String username) {
+        return adminRepository.findByUsername(username);
     }
 
     @Override

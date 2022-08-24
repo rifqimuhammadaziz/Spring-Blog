@@ -5,12 +5,13 @@ import rifqimuhammadaziz.Library.dto.AdminBasicInformation;
 import rifqimuhammadaziz.Library.model.Admin;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AdminService {
 //    Admin findByEmail(String email);
     List<AdminBasicInformation> findAllAdminBasicInformation();
     List<Admin> findAllAdmin();
-    Admin findByUsername(String username);
+    Optional<Admin> findByUsername(String username);
     AdminBasicInformation getLoginDetails(String username);
     Admin save(AdminDto adminDto);
     void enableAdminById(Long id);

@@ -29,7 +29,7 @@ public class AuthController {
     @GetMapping("/login")
     public String login(Model model, Authentication authentication) {
         if (authentication != null) {
-            Admin admin = adminService.findByUsername(authentication.getName());
+            Admin admin = adminService.findByUsername(authentication.getName()).get();
             System.out.println(admin);
             System.out.println(authentication.getPrincipal());
             return "redirect:/";
@@ -60,7 +60,7 @@ public class AuthController {
             }
 
             // Check User Exists
-            Admin admin = adminService.findByUsername(adminDto.getUsername());
+            Admin admin = adminService.findByUsername(adminDto.getUsername()).get();
             if (admin != null) {
                 model.addAttribute("admin", adminDto);
                 attributes.addFlashAttribute("registerFailed", "Failed to register, email has been registered. Please use another email.");
@@ -86,7 +86,7 @@ public class AuthController {
             e.printStackTrace();
             model.addAttribute("error", "Server Error");
         }
-        return "register";
+        return "auth/login";
     }
 
 
