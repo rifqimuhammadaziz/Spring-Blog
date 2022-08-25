@@ -11,7 +11,7 @@ public interface AdminService {
 //    Admin findByEmail(String email);
     List<AdminBasicInformation> findAllAdminBasicInformation();
     List<Admin> findAllAdmin();
-    Optional<Admin> findByUsername(String username);
+    Admin findByUsername(String username);
     AdminBasicInformation getLoginDetails(String username);
     Admin save(AdminDto adminDto);
     void enableAdminById(Long id);

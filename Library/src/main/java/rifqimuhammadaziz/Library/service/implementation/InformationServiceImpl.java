@@ -46,7 +46,7 @@ public class InformationServiceImpl implements InformationService {
     @Override
     public Information save(InformationDto informationDto, Principal principal) {
         try {
-            Admin admin = adminRepository.findByUsername(principal.getName()).orElseThrow();
+            Admin admin = adminRepository.findByUsername(principal.getName());
             Information information = mapperEntity(informationDto);
             information.setAuthor(admin.getFullName());
             information.setCreatedDate(LocalDateTime.now());

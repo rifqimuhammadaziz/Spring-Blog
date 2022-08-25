@@ -18,8 +18,7 @@ public class AdminServiceConfiguration implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Admin admin = adminRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Could not find username: " + username));
+        Admin admin = adminRepository.findByUsername(username);
 
         return new User(
                 admin.getUsername(),

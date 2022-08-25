@@ -42,15 +42,14 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Optional<Admin> findByUsername(String username) {
+    public Admin findByUsername(String username) {
         return adminRepository.findByUsername(username);
     }
 
     @Override
     public AdminBasicInformation getLoginDetails(String username) {
         AdminBasicInformation adminBasicInformation = new AdminBasicInformation();
-        Admin admin = adminRepository.findByUsername(username)
-                .orElseThrow(() -> new NotFoundException("Admin with username: " + username + " is not found"));
+        Admin admin = adminRepository.findByUsername(username);
 
         adminBasicInformation.setUsername(admin.getUsername());
         adminBasicInformation.setFirstName(admin.getFirstName());

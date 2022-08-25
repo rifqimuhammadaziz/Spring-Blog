@@ -87,7 +87,7 @@ public class DatabaseSeeder implements CommandLineRunner {
     }
 
     private void postSeeder() {
-        Admin admin = adminRepository.findByUsername("rifqi@gmail.com").orElseThrow(() -> new NotFoundException("Not found"));
+        Admin admin = adminRepository.findByUsername("rifqi@gmail.com");
         PostCategory category = postCategoryRepository.findById(1L).get();
         if (postRepository.count() == 0) {
             Post post1 = new Post();
@@ -130,7 +130,7 @@ public class DatabaseSeeder implements CommandLineRunner {
     }
 
     private void informationSeeder() {
-        Admin admin = adminRepository.findByUsername("rifqi@gmail.com").orElseThrow(() -> new NotFoundException("Not found"));
+        Admin admin = adminRepository.findByUsername("rifqi@gmail.com");
         InformationCategory category = informationCategoryRepository.findById(1L).get();
         if (informationRepository.count() == 0) {
             Information information1 = new Information();
