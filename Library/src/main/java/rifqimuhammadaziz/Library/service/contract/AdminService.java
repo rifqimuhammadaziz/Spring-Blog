@@ -16,4 +16,6 @@ public interface AdminService {
     Admin save(AdminDto adminDto);
     void enableAdminById(Long id);
     void disableAdminById(Long id);
+
+    boolean existsByUsername(String username);
 }

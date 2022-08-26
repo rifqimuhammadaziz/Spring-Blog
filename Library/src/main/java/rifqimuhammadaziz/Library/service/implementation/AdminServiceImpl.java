@@ -84,6 +84,11 @@ public class AdminServiceImpl implements AdminService {
         adminRepository.save(admin);
     }
 
+    @Override
+    public boolean existsByUsername(String username) {
+        return adminRepository.existsByUsername(username);
+    }
+
     public Admin mapperEntityFromDto(AdminDto adminDto) {
         Admin admin = modelMapper.map(adminDto, Admin.class);
         return admin;

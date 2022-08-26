@@ -1,7 +1,9 @@
 package rifqimuhammadaziz.Dashboard.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,7 @@ public class AuthController {
 
     private AdminService adminService;
     private BCryptPasswordEncoder passwordEncoder;
+    private Environment env;
 
     @GetMapping("/login")
     public String login(Model model, Authentication authentication) {
@@ -60,11 +63,11 @@ public class AuthController {
             }
 
             // Check User Exists
-            Admin admin = adminService.findByUsername(adminDto.getUsername());
-            if (admin != null) {
+            boolean admin = adminService.existsByUsername(adminDto.getUsername());
+            if (admin) {
                 model.addAttribute("admin", adminDto);
-                attributes.addFlashAttribute("registerFailed", "Failed to register, email has been registered. Please use another email.");
-                System.out.println(admin);
+                attributes.addFlashAttribute("registerFailed", env.getProperty("register.failed"));
+                log.error("Failed to register, email has been registered");
                 return "redirect:/register";
             }
 
@@ -73,7 +76,7 @@ public class AuthController {
                 adminDto.setPassword(passwordEncoder.encode(adminDto.getPassword()));
                 adminService.save(adminDto);
                 log.info("Register Success");
-                attributes.addFlashAttribute("registerSuccess", "Sucessfully register new account.");
+                attributes.addFlashAttribute("registerSuccess", "Successfully register new account.");
                 model.addAttribute("admin", adminDto);
                 return "redirect:/login";
             } else {
